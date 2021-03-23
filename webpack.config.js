@@ -1,45 +1,38 @@
-const path = require("path");
-const { webpack } = require("webpack");
-//import css from 'file.css';
-//new webpack.EnvironmentPlugin(["NODE_ENV", "DEBUG"]);
-module.exports = () => {
-  //console.log("process.env: ", process.env);
+const path = require('path');
 
-  console.log("process.env.node_env: ", process.env.NODE_ENV);
-
-  return {
-    entry: "./client/index.js",
-    devServer: {
-      publicPath: "/build/",
-      historyApiFallback: true,
-      contentBase: './client',
-      proxy: {
-        '/': 'http://localhost:3000',
-      }
-    },
-    output: {
-      path: path.resolve(__dirname, "build"),
-      filename: "bundle.js",
-    },
-    mode: process.env.NODE_ENV,
-    module: {
-      rules: [
-        {
-          test: /\.jsx?/,
-          exclude: /node_modules/,
-          use: {
-            loader: "babel-loader",
-            options: {
-              presets: ["@babel/preset-env", "@babel/preset-react"],
-            },
+module.exports = {
+  mode: process.env.NODE_ENV,
+  entry: './client/index.js',
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    filename: 'bundle.js',
+  },
+  module: {
+    rules: [
+      {
+        test: /.(jsx|js)$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         },
-        {
-          test: /\.s[ac]ss$/i,
-          use: ["style-loader", "css-loader", "sass-loader"],
-        },
-      ],
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+    ],
+  },
+  devtool: 'eval-source-map',
+  devServer: {
+    publicPath: '/build/',
+    proxy: {
+      '/': 'http://localhost:3000',
     },
-  };
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
 };
-
