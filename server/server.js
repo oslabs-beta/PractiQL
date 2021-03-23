@@ -2,13 +2,14 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-const PORT = 3000;
+app.use(express.json());
+
+app.use('/build', express.static(path.resolve(__dirname, '../build')));
 
 app.get('/', (req, res) => {
-  console.log('testing get');
-  return res.sendFile(path.resolve(__dirname, '../client/index.html'));
+  return res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`Listening on ${PORT}`);
-})
+app.listen(3000, () => {
+  console.log('Server listening on port 3000');
+});
