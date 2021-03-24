@@ -16,6 +16,11 @@ import 'codemirror-graphql/hint';
 import 'codemirror-graphql/lint';
 import 'codemirror-graphql/mode';
 import 'codemirror/mode/javascript/javascript';
+
+//GraphQL schema used for testing, needs to be removed in production
+//We will replace this when we get the Schema from the users target endpoint.
+//lines ~20 - ~150
+
 const {
   GraphQLSchema,
   GraphQLObjectType,

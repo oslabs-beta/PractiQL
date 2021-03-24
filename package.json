@@ -7,7 +7,7 @@
     "start": "node server/server.js",
     "build": "NODE_ENV=production webpack",
     "dev": "NODE_ENV=development webpack serve --open & nodemon server/server.js",
-    "windows": "concurrently \"NODE_ENV=development nodemon server/server.js\" \"NODE_ENV=development webpack serve --open\""
+    "windows": "concurrently \"cross-env NODE_ENV=development nodemon server/server.js\" \"NODE_ENV=development webpack serve --open\""
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
     "codemirror": "^5.60.0",
     "codemirror-graphql": "^1.0.0",
     "cookie-parser": "^1.4.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "graphql": "^15.5.0",
