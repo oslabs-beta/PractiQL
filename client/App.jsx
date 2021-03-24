@@ -7,7 +7,7 @@ export default function App() {
 
   return (
     <div className='main-container'>
-      <TopBar />
+      <TopBar input={input}/>
       <div className='content-container'>
         <Input value={input} onChange={setInput} />
         <Input value={input} onChange={setInput} />
