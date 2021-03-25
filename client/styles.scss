@@ -1,10 +1,74 @@
+.queryResults {
+  border: 1px solid black;
+  flex-grow: 1;
+}
+
+.code-mirror-wrapper {
+  border: 1px solid rgb(235, 235, 235);
+  overflow-y: hidden;
+  max-height: 150px;
+}
+
+.CodeMirror {
+  max-height: 150px;
+}
+
+.CodeMirror-overlayscroll-vertical div {
+  background-color: rgba(65, 65, 65, 0.15);
+}
+
+/* The fake, visible scrollbars. Used to force redraw during scrolling
+   before actual scrolling happens, thus preventing shaking and
+   flickering artifacts. */
+// .CodeMirror-vscrollbar,
+// .CodeMirror-hscrollbar,
+// .CodeMirror-scrollbar-filler,
+// .CodeMirror-gutter-filler {
+//   position: fixed;
+//   z-index: 6;
+//   display: inherit;
+//   outline: none;
+// }
+
+// .CodeMirror-vscrollbar {
+// color: red;
+// background-color: red;
+// right: 0;
+// top: 0;
+// overflow-x: hidden;
+// overflow-y: hidden !important;
+// }
+
+// .CodeMirror-hscrollbar {
+//   bottom: 0;
+//   left: 0;
+//   overflow-y: hidden;
+//   overflow-x: scroll;
+// }
+
+// .CodeMirror-scrollbar-filler {
+//   right: 0;
+//   bottom: 0;
+// }
+
+// .CodeMirror-gutter-filler {
+// background-color: red;
+// left: 0;
+// bottom: 0;
+// }
+
+// .CodeMirror-scroll {
+// top: 0;
+// left: 0;
+// max-height: 150px;
+// }
 .main-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
 
-.content-container{
+.content-container {
   display: flex;
   // textarea {
   //   margin: 10px;
@@ -18,10 +82,10 @@
   flex-basis: 0;
   display: flex;
   flex-direction: column;
-  padding: .5rem;
+  padding: 0.5rem;
 }
 
-.code-mirror-wrapper{
+.code-mirror-wrapper-input {
   // display: flex;
   flex-grow: 1;
   overflow: hidden;
