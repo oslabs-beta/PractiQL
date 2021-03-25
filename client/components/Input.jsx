@@ -153,11 +153,25 @@ const schema = new GraphQLSchema({
 export default function Input(props) {
   const {
     value,
-    onChange
+    onChange,
+    selection,
+    onSelectionChange
   } = props
+
   function handleChange(editor, data, value){
-      onChange(value)
+      onChange(value);
   }
+
+  function handleSelection(sel) {
+    if(onSelectionChange){
+      onSelectionChange(sel);
+      console.log(selection);
+    }
+    
+    // console.log(onSelectionChange);
+    
+  }
+
   function handlePress(editor, keyEvent){
       if(!editor.state.completionActive && keyEvent.keyCode != 13){
         editor.showHint({completeSingle: false});
@@ -170,6 +184,7 @@ export default function Input(props) {
           value={value}
           onKeyPress={handlePress}
           className='code-mirror-wrapper'
+          onCursor={(editor, data) => {handleSelection(editor.getSelection())}}
           options={{
             foldGutter: true,
             gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
