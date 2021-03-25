@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/server.js",
     "build": "NODE_ENV=production webpack",
-    "dev": "NODE_ENV=development webpack serve & nodemon server/server.js",
+    "dev": "NODE_ENV=development webpack serve --open & nodemon server/server.js",
     "windows": "concurrently \"NODE_ENV=development nodemon server/server.js\" \"NODE_ENV=development webpack serve --open\""
   },
   "repository": {
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/oslabs-beta/PractiQL#readme",
   "dependencies": {
+    "codemirror": "^5.60.0",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -28,6 +29,7 @@
     "pg": "^8.5.1",
     "postgres": "^1.0.2",
     "react": "^17.0.1",
+    "react-codemirror2": "^7.2.1",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
@@ -38,7 +40,7 @@
     "@babel/preset-env": "^7.13.9",
     "@babel/preset-react": "^7.12.13",
     "babel-loader": "^8.2.2",
-    "css-loader": "^5.1.1",
+    "css-loader": "^5.2.0",
     "node-fetch": "^2.6.1",
     "nodemon": "^2.0.7",
     "redux-devtools-extension": "^2.13.8",
