@@ -80,18 +80,21 @@ export default function App() {
           selection={selection}
           onSelectionChange={setSelection}
         />
-        <div className="queryResults">
+        <div className="query-results">
           <Editor
+            id="query1"
             language="javascript"
             displayName="Query Results"
             value={resultsObject}
           />
           <Editor
+            id="query2"
             language="javascript"
             displayName="Query Results"
             value={resultsObjectB}
           />
           <Editor
+            id="query3"
             language="javascript"
             displayName="Query Results"
             value={resultsObjectC}
