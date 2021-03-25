@@ -1,5 +1,6 @@
 .queryResults {
   border: 1px solid black;
+  flex-grow: 1;
 }
 
 .code-mirror-wrapper {
@@ -61,3 +62,31 @@
 // left: 0;
 // max-height: 150px;
 // }
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.content-container {
+  display: flex;
+  // textarea {
+  //   margin: 10px;
+  //   min-height: 600px;
+  //   min-width: 400px;
+  // }
+}
+
+.editor-container {
+  flex-grow: 1;
+  flex-basis: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+}
+
+.code-mirror-wrapper-input {
+  // display: flex;
+  flex-grow: 1;
+  overflow: hidden;
+}

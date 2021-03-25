@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Editor from './components/Editor';
+import TopBar from './components/TopBar';
+import Input from './components/Input';
 
 const resultsObject = {
   persons: {
@@ -64,28 +66,38 @@ const resultsObjectC = {
   },
 };
 
-function App() {
+export default function App() {
+  const [input, setInput] = useState('');
+  const [selection, setSelection] = useState('');
+
   return (
-    <>
-      <div className="queryResults">
-        <Editor
-          language="javascript"
-          displayName="Query Results"
-          value={resultsObject}
+    <div className="main-container">
+      <TopBar input={input} selection={selection} />
+      <div className="content-container">
+        <Input
+          value={input}
+          onChange={setInput}
+          selection={selection}
+          onSelectionChange={setSelection}
         />
-        <Editor
-          language="javascript"
-          displayName="Query Results"
-          value={resultsObjectB}
-        />
-        <Editor
-          language="javascript"
-          displayName="Query Results"
-          value={resultsObjectC}
-        />
+        <div className="queryResults">
+          <Editor
+            language="javascript"
+            displayName="Query Results"
+            value={resultsObject}
+          />
+          <Editor
+            language="javascript"
+            displayName="Query Results"
+            value={resultsObjectB}
+          />
+          <Editor
+            language="javascript"
+            displayName="Query Results"
+            value={resultsObjectC}
+          />
+        </div>
       </div>
-    </>
+    </div>
   );
 }
-
-export default App;
