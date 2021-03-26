@@ -29,10 +29,17 @@ console.log(arrItems[i])
     .then(res => res.json())
     .then(data => {
       // console.log(myQuery);
-      // console.log(data.data)
+      //console.log(data.errors)
+      if(data.errors) {
+        setResults(data.errors);
+        return;
+      }
       
       // SET STATE - results
-      setResults(data.data)
+      setResults([data.data])
+    })
+    .catch(err => {
+      console.log(err);
     })
   }
 

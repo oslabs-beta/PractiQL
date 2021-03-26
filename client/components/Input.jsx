@@ -191,7 +191,8 @@ export default function Input(props) {
           lineWrapping: true,
           indentUnit: 2,
           tabSize: 2,
-          //lint need options for schema
+          //currently is not linting need to look into it, might need options
+          mode: 'graphql',
           lint: {
             schema: schema,
           },
@@ -199,8 +200,6 @@ export default function Input(props) {
           hintOptions: {
             schema: schema,
           },
-          readOnly: false,
-          mode: 'graphql',
           theme: 'material',
           lineNumbers: true,
           extraKeys: { 'Ctrl-Space': 'autocomplete' },

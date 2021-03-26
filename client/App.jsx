@@ -70,11 +70,13 @@ const resultsObjectC = {
 export default function App() {
   const [input, setInput] = useState('');
   const [selection, setSelection] = useState('');
-  const [results, setResults] = useState('');
+  const [results, setResults] = useState([resultsObject, resultsObjectB, resultsObjectC,resultsObject, resultsObjectB, resultsObjectC,resultsObject, resultsObjectB, resultsObjectC]);
+  const [mappedResults, setMappedResults] = useState([]);
   const [schema, setSchema] = useState('');
 
   useEffect(() =>  {
-    fetch('https://graphql-pokemon2.vercel.app', {
+    // 'https://graphql-pokemon2.vercel.app'
+    fetch('https://countries.trevorblades.com/', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -92,6 +94,46 @@ export default function App() {
         })
   }, [])
 
+  useEffect(() => {
+    // get results
+    // iterate through results to create array of Editor components
+    // Array of components becomes/changes mappedResults state
+    // mappedResults state updates Editor components
+
+    const map = results.map((result, index) => {
+      const editor =       
+      <Editor
+      key={`resultsEditor${index}`}
+      id={`query${index}`}
+      language="graphql"
+      value={result}
+      />
+      return editor;
+    });
+
+    setMappedResults(() => map);
+  }, [])
+
+  useEffect(() => {
+    // get results
+    // iterate through results to create array of Editor components
+    // Array of components becomes/changes mappedResults state
+    // mappedResults state updates Editor components
+
+    const map = results.map((result, index) => {
+      const editor =       
+      <Editor
+      key={`resultsEditor${index}`}
+      id={`query${index}`}
+      language="graphql"
+      value={result}
+      />
+      return editor;
+    });
+
+    setMappedResults(() => map);
+  }, [results])
+
   return (
     <div className="main-container">
       <TopBar input={input} selection={selection} setResults={setResults} />
@@ -104,7 +146,8 @@ export default function App() {
           schema={schema}
         />
         <div className="query-results">
-          <Editor
+          {mappedResults}
+          {/* <Editor
             id="query1"
             language="javascript"
             displayName="Query Results"
@@ -122,7 +165,7 @@ export default function App() {
             language="javascript"
             displayName="Query Results"
             value={resultsObjectC}
-          />
+          /> */}
         </div>
       </div>
     </div>
