@@ -69,10 +69,11 @@ const resultsObjectC = {
 export default function App() {
   const [input, setInput] = useState('');
   const [selection, setSelection] = useState('');
+  const [results, setResults] = useState('');
 
   return (
     <div className="main-container">
-      <TopBar input={input} selection={selection} />
+      <TopBar input={input} selection={selection} setResults={setResults} />
       <div className="content-container">
         <Input
           value={input}
@@ -85,7 +86,8 @@ export default function App() {
             id="query1"
             language="javascript"
             displayName="Query Results"
-            value={resultsObject}
+            //value={resultsObject}
+            value={results}
           />
           <Editor
             id="query2"
