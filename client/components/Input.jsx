@@ -148,13 +148,13 @@ const RootMutationType = new GraphQLObjectType({
   }),
 });
 
-const schema = new GraphQLSchema({
-  query: RootQueryType,
-  mutation: RootMutationType,
-});
+// const schema = new GraphQLSchema({
+//   query: RootQueryType,
+//   mutation: RootMutationType,
+// });
 
 export default function Input(props) {
-  const { value, onChange, selection, onSelectionChange } = props;
+  const { value, onChange, selection, onSelectionChange, schema } = props;
 
   function handleChange(editor, data, value) {
     onChange(value);
@@ -165,7 +165,6 @@ export default function Input(props) {
       onSelectionChange(sel);
       console.log(selection);
     }
-
     // console.log(onSelectionChange);
   }
 
@@ -192,7 +191,8 @@ export default function Input(props) {
           lineWrapping: true,
           indentUnit: 2,
           tabSize: 2,
-          //lint need options for schema
+          //currently is not linting need to look into it, might need options
+          mode: 'graphql',
           lint: {
             schema: schema,
           },
@@ -200,8 +200,6 @@ export default function Input(props) {
           hintOptions: {
             schema: schema,
           },
-          readOnly: false,
-          mode: 'graphql',
           theme: 'material',
           lineNumbers: true,
           extraKeys: { 'Ctrl-Space': 'autocomplete' },
