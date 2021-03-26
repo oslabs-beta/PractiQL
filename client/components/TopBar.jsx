@@ -14,7 +14,10 @@ export default function TopBar(props) {
 
       myQuery += arrItems[i].trim() + (i < arrItems.length - 1 ? ',\r\n' : '\r\n');
     
-console.log(arrItems[i])
+      const x = arrItems[i].substring(0, arrItems[i].indexOf('{')).trim();
+      querySubjects.push(x);
+
+console.log(querySubjects)
 
     }
     myQuery += '}';
