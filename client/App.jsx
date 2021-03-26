@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Editor from './components/Editor';
 import TopBar from './components/TopBar';
 import Input from './components/Input';
+import { getIntrospectionQuery, buildClientSchema } from 'graphql';
 
 const resultsObject = {
   persons: {
@@ -70,6 +71,26 @@ export default function App() {
   const [input, setInput] = useState('');
   const [selection, setSelection] = useState('');
   const [results, setResults] = useState('');
+  const [schema, setSchema] = useState('');
+
+  useEffect(() =>  {
+    fetch('https://graphql-pokemon2.vercel.app', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query: getIntrospectionQuery(),
+        }),
+      })
+        .then(res => res.json())
+        .then(schemaJSON => {
+          console.log(schemaJSON);
+          setSchema(buildClientSchema(schemaJSON.data));
+          console.log(buildClientSchema(schemaJSON.data))
+        })
+  }, [])
 
   return (
     <div className="main-container">
@@ -80,6 +101,7 @@ export default function App() {
           onChange={setInput}
           selection={selection}
           onSelectionChange={setSelection}
+          schema={schema}
         />
         <div className="query-results">
           <Editor
