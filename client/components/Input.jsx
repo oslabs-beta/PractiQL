@@ -4,6 +4,8 @@ import { ValidationContext, SDLValidationContext } from 'graphql';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
 import 'codemirror/theme/neo.css';
+import 'codemirror/theme/nord.css';
+import 'codemirror/theme/base16-light.css';
 import 'codemirror/addon/hint/show-hint.css';
 import 'codemirror/addon/hint/show-hint';
 import 'codemirror/addon/lint/lint';
@@ -174,14 +176,18 @@ export default function Input(props) {
     }
   }
   return (
-    <div className="editor-container">
+    <div className="input-container-outer">
       <ControlledEditor
         onBeforeChange={handleChange}
         value={value}
         onKeyPress={handlePress}
-        className="code-mirror-wrapper-input"
+        className="input-container-inner"
         onCursor={(editor, data) => {
           handleSelection(editor.getSelection());
+        }}
+        editorDidMount={(editor) => {
+          editor.display.wrapper.className =
+            editor.display.wrapper.className + ' input-instance';
         }}
         options={{
           foldGutter: true,
@@ -200,8 +206,8 @@ export default function Input(props) {
           hintOptions: {
             schema: schema,
           },
-          theme: 'material',
           lineNumbers: true,
+          theme: 'neo',
           extraKeys: { 'Ctrl-Space': 'autocomplete' },
         }}
       />
