@@ -1,0 +1,8 @@
+.CodeMirror {
+  max-height: 150px;
+  transition: height 185ms, max-height 185ms;
+}
+
+.CodeMirror-overlayscroll-vertical div {
+  background-color: rgba(65, 65, 65, 0.15);
+}
