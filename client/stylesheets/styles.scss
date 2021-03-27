@@ -2,28 +2,10 @@
 @import 'io-container';
 @import 'input-container';
 @import 'output-container';
+@import 'widget-btn';
 
 $secondary-color: rgba(135, 250, 231, 0.849);
 $custom-black: rgb(65, 65, 65);
-
-.widget-btn {
-  position: absolute;
-  color: rgba(65, 65, 65, 0.4);
-  right: 1.1rem;
-  margin-top: 0.3rem;
-  z-index: 100;
-  background-color: rgba(75, 75, 75, 0.065);
-  border-radius: 0.3rem;
-  border: 0;
-  outline: none;
-  cursor: pointer;
-  transition: all 235ms;
-}
-
-.widget-btn:hover {
-  color: darken(rgb(100, 100, 100), 45%);
-  background-color: rgba(135, 250, 231, 0.849);
-}
 
 .CodeMirror {
   max-height: 150px;
