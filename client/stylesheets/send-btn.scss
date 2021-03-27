@@ -11,7 +11,7 @@
 //   transition: background-color 150ms;
 // }
 
-.run-btn {
+.send-btn {
   cursor: pointer;
   padding: 0.5rem 0;
   width: 5rem;
@@ -24,14 +24,18 @@
   transition: background-color 200ms;
 }
 
-.run-btn:hover {
+.send-btn:hover {
   background-color: lighten(rgba(212, 212, 212, 0.06), 5%);
 }
 
-.run-btn:active {
+.send-btn:active {
   box-shadow: 0px 0px 0px 0px;
   color: black;
   background-color: darken(rgba(212, 212, 212, 0.06), 50%);
   width: 4.95rem;
   box-shadow: 0;
+}
+
+.send-btn:focus {
+  outline: none;
 }
