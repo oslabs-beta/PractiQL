@@ -66,7 +66,7 @@ export default function Output(props) {
         }}
         options={{
           mode: language,
-          lineNumbers: true,
+          lineNumbers: false,
           readOnly: true,
           scrollbarStyle: 'overlay',
         }}
