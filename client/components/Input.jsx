@@ -184,11 +184,8 @@ export default function Input(props) {
           handleSelection(editor.getSelection());
         }}
         editorDidMount={(editor) => {
-          console.log('Input.jsx - line 187');
-          console.log(editor.display.wrapper.className);
           editor.display.wrapper.className =
             editor.display.wrapper.className + ' input-instance';
-          console.log(editor.display.wrapper.className);
         }}
         options={{
           foldGutter: true,
