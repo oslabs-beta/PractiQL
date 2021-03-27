@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function TopBar(props) {
-  const { input, selection, setResults } = props;
+  const { input, selection, setResults, setQuerySubjects } = props;
 
   const handleClick = () => {
     const sel = selection ? selection.trim() : input.trim();
@@ -10,9 +10,12 @@ export default function TopBar(props) {
     let querySubjects = [];
     let myQuery = 'query myquery {\r\n';
 
-    for (let i = 0; i < arrItems.length; i++) {
-      myQuery +=
-        arrItems[i].trim() + (i < arrItems.length - 1 ? ',\r\n' : '\r\n');
+      myQuery += arrItems[i].trim() + (i < arrItems.length - 1 ? ',\r\n' : '\r\n');
+    
+      const x = arrItems[i].substring(0, arrItems[i].indexOf('{')).trim();
+      querySubjects.push(x);
+
+//console.log(querySubjects)
 
       console.log(arrItems[i]);
     }
@@ -22,8 +25,18 @@ export default function TopBar(props) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        query: myQuery,
-      }),
+        query: myQuery
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+
+// console.log(myQuery);
+// console.log(data.data)
+      
+      // SET STATE - results
+      setResults(data.data)
+      setQuerySubjects(querySubjects)
     })
       .then((res) => res.json())
       .then((data) => {
