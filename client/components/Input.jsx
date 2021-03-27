@@ -204,7 +204,6 @@ export default function Input(props) {
           hintOptions: {
             schema: schema,
           },
-          theme: 'material',
           lineNumbers: true,
           extraKeys: { 'Ctrl-Space': 'autocomplete' },
         }}
