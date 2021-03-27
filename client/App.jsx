@@ -30,11 +30,23 @@ query {
     name
   }
 }
+=============================================
+query {
+  continents {
+    name
+  }
+}
+
+query {
+  continents {
+    code
+  }
+}
 */
 
-  const editors = [];
+  const outputs = [];
   for (let i = 0; i < querySubjects.length; i++){
-    editors.push(<Editor key={i} id={i} language='javascript' value={results[querySubjects[i]]} />)
+    outputs.push(<Output key={i} id={i} language='javascript' value={results[querySubjects[i]]} />)
   }
 
   useEffect(() => {
@@ -57,48 +69,6 @@ query {
       });
   }, []);
 
-  useEffect(() => {
-    // get results
-    // iterate through results to create array of Editor components
-    // Array of components becomes/changes mappedResults state
-    // mappedResults state updates Editor components
-
-    const map = results.map((result, index) => {
-      const outputInstance = (
-        <Output
-          key={`outputKey${index}`}
-          id={`output${index}`}
-          language="graphql"
-          value={result}
-        />
-      );
-      return outputInstance;
-    });
-
-    setMappedResults(() => map);
-  }, []);
-
-  useEffect(() => {
-    // get results
-    // iterate through results to create array of Editor components
-    // Array of components becomes/changes mappedResults state
-    // mappedResults state updates Editor components
-
-    const map = results.map((result, index) => {
-      const outputInstance = (
-        <Output
-          key={`outputKey${index}`}
-          id={`output${index}`}
-          language="graphql"
-          value={result}
-        />
-      );
-      return outputInstance;
-    });
-
-    setMappedResults(() => map);
-  }, [results]);
-
   return (
     <div className="main-container">
     <TopBar input={input} selection={selection} setResults={setResults} setQuerySubjects={setQuerySubjects} />
@@ -113,7 +83,7 @@ query {
         />
         <div className="output-container-outer output-container-outer--nord">
 
-          {editors}
+          {outputs}
 
         </div>
       </div>
