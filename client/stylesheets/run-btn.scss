@@ -1,0 +1,23 @@
+.run-btn {
+  height: 3rem;
+  width: 3rem;
+  margin: 0.5rem;
+  border-radius: 50%;
+  border: 0;
+  color: white;
+  background-color: steelblue;
+  box-shadow: 0.75px 0.75px 0.75px 0.75px lightgray;
+  cursor: pointer;
+  transition: background-color 150ms;
+}
+
+.run-btn:hover {
+  background-color: lighten(steelblue, 5%);
+}
+
+.run-btn:active {
+  background-color: darken(steelblue, 25%);
+}
+.top-bar {
+  border: 1px solid purple;
+}
