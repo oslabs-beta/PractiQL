@@ -30,6 +30,9 @@ export default function TopBar(props) {
         // console.log(myQuery);
         //console.log(data.errors)
         if (data.errors) {
+          data.errors[0].custom = 'my test message';
+          console.log(data.errors);
+          console.log(data.errors.message);
           setResults(data.errors);
           return;
         }

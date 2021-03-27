@@ -3,7 +3,6 @@ import Output from './components/Output';
 import TopBar from './components/TopBar';
 import Input from './components/Input';
 import { getIntrospectionQuery, buildClientSchema } from 'graphql';
-
 const resultsObject = {
   persons: {
     person1: {
@@ -20,7 +19,6 @@ const resultsObject = {
     },
   },
 };
-
 const resultsObjectB = {
   persons: {
     person1: {
@@ -29,7 +27,6 @@ const resultsObjectB = {
     },
   },
 };
-
 const resultsObjectC = {
   persons: {
     person1: {
@@ -66,7 +63,6 @@ const resultsObjectC = {
     },
   },
 };
-
 export default function App() {
   const [input, setInput] = useState('');
   const [selection, setSelection] = useState('');
@@ -83,7 +79,6 @@ export default function App() {
   ]);
   const [mappedResults, setMappedResults] = useState([]);
   const [schema, setSchema] = useState('');
-
   useEffect(() => {
     // 'https://graphql-pokemon2.vercel.app'
     fetch('https://countries.trevorblades.com/', {
@@ -103,13 +98,11 @@ export default function App() {
         console.log(buildClientSchema(schemaJSON.data));
       });
   }, []);
-
   useEffect(() => {
     // get results
     // iterate through results to create array of Editor components
     // Array of components becomes/changes mappedResults state
     // mappedResults state updates Editor components
-
     const map = results.map((result, index) => {
       const outputInstance = (
         <Output
@@ -121,16 +114,13 @@ export default function App() {
       );
       return outputInstance;
     });
-
     setMappedResults(() => map);
   }, []);
-
   useEffect(() => {
     // get results
     // iterate through results to create array of Editor components
     // Array of components becomes/changes mappedResults state
     // mappedResults state updates Editor components
-
     const map = results.map((result, index) => {
       const outputInstance = (
         <Output
@@ -142,14 +132,11 @@ export default function App() {
       );
       return outputInstance;
     });
-
     setMappedResults(() => map);
   }, [results]);
-
   return (
     <div className="main-container">
       <TopBar input={input} selection={selection} setResults={setResults} />
-
       <div className="io-container">
         <Input
           value={input}
