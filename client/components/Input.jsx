@@ -4,6 +4,8 @@ import { ValidationContext, SDLValidationContext } from 'graphql';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
 import 'codemirror/theme/neo.css';
+import 'codemirror/theme/nord.css';
+import 'codemirror/theme/base16-light.css';
 import 'codemirror/addon/hint/show-hint.css';
 import 'codemirror/addon/hint/show-hint';
 import 'codemirror/addon/lint/lint';
@@ -148,13 +150,13 @@ const RootMutationType = new GraphQLObjectType({
   }),
 });
 
-const schema = new GraphQLSchema({
-  query: RootQueryType,
-  mutation: RootMutationType,
-});
+// const schema = new GraphQLSchema({
+//   query: RootQueryType,
+//   mutation: RootMutationType,
+// });
 
 export default function Input(props) {
-  const { value, onChange, selection, onSelectionChange } = props;
+  const { value, onChange, selection, onSelectionChange, schema } = props;
 
   function handleChange(editor, data, value) {
     onChange(value);
@@ -165,7 +167,6 @@ export default function Input(props) {
       onSelectionChange(sel);
       console.log(selection);
     }
-
     // console.log(onSelectionChange);
   }
 
@@ -175,14 +176,18 @@ export default function Input(props) {
     }
   }
   return (
-    <div className="editor-container">
+    <div className="input-container-outer">
       <ControlledEditor
         onBeforeChange={handleChange}
         value={value}
         onKeyPress={handlePress}
-        className="code-mirror-wrapper-input"
+        className="input-container-inner"
         onCursor={(editor, data) => {
           handleSelection(editor.getSelection());
+        }}
+        editorDidMount={(editor) => {
+          editor.display.wrapper.className =
+            editor.display.wrapper.className + ' input-instance';
         }}
         options={{
           foldGutter: true,
@@ -192,7 +197,8 @@ export default function Input(props) {
           lineWrapping: true,
           indentUnit: 2,
           tabSize: 2,
-          //lint need options for schema
+          //currently is not linting need to look into it, might need options
+          mode: 'graphql',
           lint: {
             schema: schema,
           },
@@ -200,10 +206,8 @@ export default function Input(props) {
           hintOptions: {
             schema: schema,
           },
-          readOnly: false,
-          mode: 'graphql',
-          theme: 'material',
           lineNumbers: true,
+          theme: 'neo',
           extraKeys: { 'Ctrl-Space': 'autocomplete' },
         }}
       />
