@@ -7,7 +7,7 @@ import 'codemirror/addon/scroll/simplescrollbars';
 import 'codemirror/addon/scroll/simplescrollbars.css';
 import { Controlled as ControlledEditor } from 'react-codemirror2';
 
-export default function Editor(props) {
+export default function Output(props) {
   const [accordion, setAccordion] = useState({
     accordionValue: 'collapsed',
     editorToGrab: null,
@@ -54,7 +54,7 @@ export default function Editor(props) {
       <ControlledEditor
         id={props.id}
         value={JSON.stringify(value, null, 2)}
-        className="code-mirror-wrapper"
+        className="output-container-inner"
         editorDidMount={(editor) => {
           setAccordion((prev) => {
             return {

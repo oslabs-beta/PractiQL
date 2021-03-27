@@ -174,12 +174,12 @@ export default function Input(props) {
     }
   }
   return (
-    <div className="editor-container">
+    <div className="input-container-outer">
       <ControlledEditor
         onBeforeChange={handleChange}
         value={value}
         onKeyPress={handlePress}
-        className="code-mirror-wrapper-input"
+        className="input-container-inner"
         onCursor={(editor, data) => {
           handleSelection(editor.getSelection());
         }}
