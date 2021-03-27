@@ -13,6 +13,7 @@
 
 .send-btn {
   cursor: pointer;
+  color: $text-black;
   padding: 0.5rem 0;
   width: 5rem;
   margin: 0.5rem;
@@ -20,12 +21,12 @@
   border-radius: 0.4rem;
   font-size: 1rem;
   background-color: rgba(0, 0, 0, 0.03);
-  box-shadow: 0.9px 0.9px 0.9px 0.9px rgb(200, 200, 200);
-  transition: background-color 200ms;
+  box-shadow: 0.8px 0.8px 0.8px 0.8px rgb(200, 200, 200);
+  transition: color 200ms, background-color 200ms;
 }
 
 .send-btn:hover {
-  background-color: lighten(rgba(212, 212, 212, 0.06), 5%);
+  background-color: lighten(rgba(212, 212, 212, 0.08), 45%);
 }
 
 .send-btn:active {

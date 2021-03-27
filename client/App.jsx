@@ -158,7 +158,9 @@ export default function App() {
           onSelectionChange={setSelection}
           schema={schema}
         />
-        <div className="output-container-outer">{mappedResults}</div>
+        <div className="output-container-outer output-container-outer--nord">
+          {mappedResults}
+        </div>
       </div>
     </div>
   );

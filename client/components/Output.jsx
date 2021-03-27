@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
+import 'codemirror/theme/nord.css';
 import 'codemirror/mode/xml/xml';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/addon/scroll/simplescrollbars';
@@ -44,7 +45,7 @@ export default function Output(props) {
   return (
     <>
       <button
-        className={'widget-btn'}
+        className={'widget-btn widget-btn--nord'}
         onClick={() => {
           handleAccordian();
         }}
@@ -54,7 +55,7 @@ export default function Output(props) {
       <ControlledEditor
         id={props.id}
         value={JSON.stringify(value, null, 2)}
-        className="output-container-inner"
+        className="output-container-inner output-container-inner--nord"
         editorDidMount={(editor) => {
           setAccordion((prev) => {
             return {
@@ -65,9 +66,10 @@ export default function Output(props) {
           });
         }}
         options={{
-          mode: language,
+          mode: 'javascript',
           lineNumbers: false,
           readOnly: true,
+          theme: 'neo',
           scrollbarStyle: 'overlay',
         }}
       ></ControlledEditor>

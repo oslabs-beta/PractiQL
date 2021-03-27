@@ -1,0 +1,38 @@
+/* To use the complete custom nord theme: 
+  1. import 'codemirror/theme/nord.css' into input and output components
+  2. Set theme option to 'nord' for each component
+  3. Import './custom-themes/custom-nord' at the end of styles.scss.
+*/
+.top-bar--nord {
+  background: none;
+  background: linear-gradient(#2e3440 45%, $nord-black);
+  border-bottom: 1px solid black;
+}
+
+.logo--nord {
+  font-size: 1.5rem;
+  color: $nord-green;
+}
+
+.send-btn--nord {
+  border: 1px solid rgb(45, 45, 45);
+  border-top-color: rgb(60, 60, 60);
+  border-left-color: rgb(55, 55, 55);
+  border-right-color: rgb(75, 75, 75);
+  border-bottom-color: rgb(75, 75, 75);
+  box-shadow: none;
+  color: $nord-green;
+}
+
+.output-container-outer--nord {
+  border-left-color: $nord-black;
+}
+
+.output-container-inner--nord {
+  border-color: $nord-black;
+}
+
+.widget-btn--nord {
+  color: rgba(15, 15, 15);
+  background-color: rgba(185, 185, 185, 0.15);
+}

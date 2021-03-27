@@ -65,9 +65,9 @@ export default function TopBar(props) {
   }
 
   return (
-    <div className="top-bar">
-      <span className="logo">PractiQL</span>
-      <button className="send-btn" onClick={handleClick}>
+    <div className="top-bar top-bar--nord">
+      <span className="logo logo--nord">PractiQL</span>
+      <button className="send-btn send-btn--nord" onClick={handleClick}>
         Send
       </button>
     </div>

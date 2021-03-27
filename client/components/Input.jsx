@@ -4,6 +4,8 @@ import { ValidationContext, SDLValidationContext } from 'graphql';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
 import 'codemirror/theme/neo.css';
+import 'codemirror/theme/nord.css';
+import 'codemirror/theme/base16-light.css';
 import 'codemirror/addon/hint/show-hint.css';
 import 'codemirror/addon/hint/show-hint';
 import 'codemirror/addon/lint/lint';
@@ -205,6 +207,7 @@ export default function Input(props) {
             schema: schema,
           },
           lineNumbers: true,
+          theme: 'neo',
           extraKeys: { 'Ctrl-Space': 'autocomplete' },
         }}
       />
