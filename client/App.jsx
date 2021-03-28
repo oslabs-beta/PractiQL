@@ -95,22 +95,23 @@ query {
   }, []);
   return (
     <div className="main-container">
-    <TopBar input={input} selection={selection} setResults={setResults} setQuerySubjects={setQuerySubjects} />
-
-      <div className="io-container">
-        <Input
-          theme={myTheme}
-          value={input}
-          onChange={setInput}
-          selection={selection}
-          onSelectionChange={setSelection}
-          schema={schema}
-        />
-        <div className="output-container-outer output-container-outer--nord">
-
-          {outputs}
-
+      <div className='content-wrap'>
+        <div className='top-bar-wrap'>
+          <TopBar input={input} selection={selection} setResults={setResults} setQuerySubjects={setQuerySubjects} />
         </div>
+          <div className="io-container">
+            <Input
+              theme={myTheme}
+              value={input}
+              onChange={setInput}
+              selection={selection}
+              onSelectionChange={setSelection}
+              schema={schema}
+            />
+            <div className="output-container-outer output-container-outer--nord">
+              {outputs}
+            </div>
+          </div>
       </div>
     </div>
   );
