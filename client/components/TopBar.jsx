@@ -10,6 +10,7 @@ export default function TopBar(props) {
     let querySubjects = [];
     let myQuery = 'query myquery {\r\n';
 
+    for (let i = 0; i < arrItems.length; i++){
       myQuery += arrItems[i].trim() + (i < arrItems.length - 1 ? ',\r\n' : '\r\n');
     
       const x = arrItems[i].substring(0, arrItems[i].indexOf('{')).trim();
@@ -19,6 +20,7 @@ export default function TopBar(props) {
 
       console.log(arrItems[i]);
     }
+    
     myQuery += '}';
 
     fetch('https://countries.trevorblades.com', {

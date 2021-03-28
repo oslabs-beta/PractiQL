@@ -1,7 +1,8 @@
 .main-container {
   box-sizing: border-box;
+  min-height: 100vh;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
-  max-height: 100vh;
-  overflow: scroll;
+  // border: 5px solid green;
 }

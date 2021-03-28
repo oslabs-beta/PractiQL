@@ -1,16 +1,42 @@
 import React, { useState, useEffect } from 'react';
+import { getIntrospectionQuery, buildClientSchema } from 'graphql';
 import Output from './components/Output';
 import TopBar from './components/TopBar';
 import Input from './components/Input';
-import { getIntrospectionQuery, buildClientSchema } from 'graphql';
-export default function App() {
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/neo.css';
+import 'codemirror/theme/nord.css';
+import 'codemirror/theme/base16-light.css';
+import 'codemirror/addon/hint/show-hint.css';
+import 'codemirror/addon/hint/show-hint';
+import 'codemirror/addon/lint/lint';
+import 'codemirror/addon/edit/matchbrackets.js';
+import 'codemirror/addon/edit/closebrackets.js';
+import 'codemirror/addon/fold/foldgutter';
+import 'codemirror/addon/fold/brace-fold';
+import 'codemirror/addon/fold/foldgutter.css';
+import 'codemirror-graphql/hint';
+import 'codemirror-graphql/lint';
+import 'codemirror-graphql/mode';
+import 'codemirror/mode/javascript/javascript';
+import 'codemirror/addon/scroll/simplescrollbars';
+import 'codemirror/addon/scroll/simplescrollbars.css';
+
+
+
+export default function App(props) {
+  const { theme, endpoint } = props;
+
   const [input, setInput] = useState('');
   const [selection, setSelection] = useState('');
-
+  const [myTheme, setMyTheme] = useState(theme);
   const [results, setResults] = useState('');
   const [querySubjects, setQuerySubjects] = useState('');
   const [schema, setSchema] = useState('');
 
+  
+
+  
   /*
 query {
   continents {
@@ -29,11 +55,23 @@ query {
     name
   }
 }
+=============================================
+query {
+  continents {
+    name
+  }
+}
+
+query {
+  continents {
+    code
+  }
+}
 */
 
-  const editors = [];
+  const outputs = [];
   for (let i = 0; i < querySubjects.length; i++){
-    editors.push(<Editor key={i} id={i} language='javascript' value={results[querySubjects[i]]} />)
+    outputs.push(<Output key={i} id={i} language='javascript' value={results[querySubjects[i]]} theme={myTheme}/>)
   }
 
   useEffect(() => {
@@ -55,48 +93,13 @@ query {
         console.log(buildClientSchema(schemaJSON.data));
       });
   }, []);
-  useEffect(() => {
-    // get results
-    // iterate through results to create array of Editor components
-    // Array of components becomes/changes mappedResults state
-    // mappedResults state updates Editor components
-    const map = results.map((result, index) => {
-      const outputInstance = (
-        <Output
-          key={`outputKey${index}`}
-          id={`output${index}`}
-          language="graphql"
-          value={result}
-        />
-      );
-      return outputInstance;
-    });
-    setMappedResults(() => map);
-  }, []);
-  useEffect(() => {
-    // get results
-    // iterate through results to create array of Editor components
-    // Array of components becomes/changes mappedResults state
-    // mappedResults state updates Editor components
-    const map = results.map((result, index) => {
-      const outputInstance = (
-        <Output
-          key={`outputKey${index}`}
-          id={`output${index}`}
-          language="graphql"
-          value={result}
-        />
-      );
-      return outputInstance;
-    });
-    setMappedResults(() => map);
-  }, [results]);
   return (
     <div className="main-container">
     <TopBar input={input} selection={selection} setResults={setResults} setQuerySubjects={setQuerySubjects} />
 
       <div className="io-container">
         <Input
+          theme={myTheme}
           value={input}
           onChange={setInput}
           selection={selection}
@@ -105,7 +108,7 @@ query {
         />
         <div className="output-container-outer output-container-outer--nord">
 
-          {editors}
+          {outputs}
 
         </div>
       </div>

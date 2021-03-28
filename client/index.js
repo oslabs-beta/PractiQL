@@ -3,4 +3,4 @@ import { render } from 'react-dom';
 import App from './App';
 import styles from './stylesheets/styles.scss';
 
-render(<App />, document.getElementById('root'));
+render(<App theme={'nord'}/>, document.getElementById('root'));

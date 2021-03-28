@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/material.css';
-import 'codemirror/theme/nord.css';
-import 'codemirror/mode/xml/xml';
-import 'codemirror/mode/javascript/javascript';
-import 'codemirror/addon/scroll/simplescrollbars';
-import 'codemirror/addon/scroll/simplescrollbars.css';
 import { Controlled as ControlledEditor } from 'react-codemirror2';
+
 
 export default function Output(props) {
   const [accordion, setAccordion] = useState({
@@ -16,7 +10,7 @@ export default function Output(props) {
     btnText: 'expand',
   });
 
-  const { displayName, language, value, onChange } = props;
+  const { displayName, language, value, onChange, theme } = props;
 
   const handleAccordian = () => {
     console.log('Editor.jsx: handleAccordion');
@@ -69,8 +63,8 @@ export default function Output(props) {
           mode: 'javascript',
           lineNumbers: false,
           readOnly: true,
-          theme: 'neo',
-          scrollbarStyle: 'overlay',
+          theme: theme,
+          // scrollbarStyle: 'overlay',
         }}
       ></ControlledEditor>
     </>

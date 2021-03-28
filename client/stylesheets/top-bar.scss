@@ -1,4 +1,8 @@
 .top-bar {
+  // flex-grow: 1;
+  box-sizing: border-box;
+  min-width: 100%;
   background: linear-gradient(rgb(204, 204, 204), rgb(238, 238, 238));
   border-bottom: 1px solid rgb(217, 217, 217);
+  // border: 5px solid aqua;
 }
