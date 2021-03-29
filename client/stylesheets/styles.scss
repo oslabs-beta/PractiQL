@@ -10,4 +10,27 @@
 @import 'send-btn';
 @import 'widget-btn';
 @import 'logo';
-// @import './custom-themes/custom-nord';
+@import './custom-themes/custom-nord';
+
+
+body,
+html{
+    margin: 0;
+}
+
+#root {
+    height: 100vh;
+}
+
+.content-wrap{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
