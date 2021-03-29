@@ -1,6 +1,14 @@
 .CodeMirror {
-  max-height: 150px;
-  transition: height 185ms, max-height 185ms;
+  // max-height: 150px;
+  transition: height 185ms, max-height 185ms; 
+    color: #141823;
+    font-family: 'Consolas', 'Inconsolata', 'Droid Sans Mono', 'Monaco', monospace;
+    font-size: 13px;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
 }
 
 .CodeMirror-overlayscroll-vertical div {
