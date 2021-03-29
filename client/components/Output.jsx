@@ -1,70 +1,69 @@
-import React, { useState, useEffect } from 'react';
+import CodeMirror, { overlayMode } from 'codemirror';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Controlled as ControlledEditor } from 'react-codemirror2';
 
 
 export default function Output(props) {
-  const [accordion, setAccordion] = useState({
-    accordionValue: 'collapsed',
-    editorToGrab: null,
-    divWrapper: null,
-    btnText: 'expand',
-  });
+  const [editorToGrab, setEditor] = useState(null);
+  const [value, setValue] = useState('');
+  const { displayName, language, results, onChange, theme, numOfQueries } = props;
+  
+  useEffect(()=> {
+    console.log('Output.jsx: useEffect invoked');
+    if(editorToGrab) {
+    console.log('Output.jsx: in if');
+      // Create a Codemirror headless that means in the bg, and not attached to the DOM
+      let count = 1;
+      let lastLine = 0;
+      for(let key in results){
+        const instance = new CodeMirror(document.getElementById('hidden'), {
+          value: JSON.stringify(results[key], null, 2)
+        });
 
-  const { displayName, language, value, onChange, theme } = props;
-
-  const handleAccordian = () => {
-    console.log('Editor.jsx: handleAccordion');
-    // Grabs full expanded height of editor instance
-    const sizer = accordion.divWrapper.querySelector('.CodeMirror-sizer').style
-      .minHeight;
-    if (accordion.accordionValue === 'collapsed') {
-      accordion.divWrapper.style.height = sizer;
-      accordion.divWrapper.style.maxHeight = sizer;
-      setAccordion((prev) => {
-        return { ...prev, accordionValue: 'expanded', btnText: 'collapse' };
-      });
-    } else if (accordion.accordionValue === 'expanded') {
-      accordion.divWrapper.style.maxHeight = '150px';
-      accordion.divWrapper.style.height = '150px';
-      setAccordion((prev) => {
-        return { ...prev, accordionValue: 'collapsed', btnText: 'expand' };
-      });
+        if(count === 1){
+          editorToGrab.foldCode(1);
+        } else {
+          editorToGrab.foldCode(lastLine+1);
+        }
+        count++;
+        lastLine += instance.lineCount();
+        console.log(key + " lastline: " + lastLine);
+      }
     }
-    // CSS transition runs asynchronously. refresh async so it's invoked after css transition animation
-    setTimeout(() => {
-      accordion.editorToGrab.refresh();
-    }, 100);
-  };
+    console.log('Output.jsx: end of useEffect')
+  }, [results]);
+
+// through state
+  // value, setValue
+
+// custom fn
+  // grabbing editor value
+  // resetting value with same value but collapsed
+
+// didMount
+  // grab editor
+  // 
+// didUpdate
+
+  // invoke a custom function
 
   return (
     <>
-      <button
-        className={'widget-btn widget-btn--nord'}
-        onClick={() => {
-          handleAccordian();
-        }}
-      >
-        {accordion.btnText}
-      </button>
       <ControlledEditor
         id={props.id}
-        value={JSON.stringify(value, null, 2)}
+        value={JSON.stringify(results, null, 2)}
         className="output-container-inner output-container-inner--nord"
         editorDidMount={(editor) => {
-          setAccordion((prev) => {
-            return {
-              ...prev,
-              editorToGrab: editor,
-              divWrapper: editor.display.wrapper,
-            };
-          });
+          setEditor(editor);
         }}
+        on
         options={{
-          mode: 'javascript',
-          lineNumbers: false,
+          mode: language,
+          foldGutter: true,
+          gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
           readOnly: true,
           theme: theme,
-          // scrollbarStyle: 'overlay',
+          scrollbarStyle: null,
         }}
       ></ControlledEditor>
     </>

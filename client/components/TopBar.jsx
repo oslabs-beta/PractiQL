@@ -35,26 +35,16 @@ export default function TopBar(props) {
 
 // console.log(myQuery);
 // console.log(data.data)
-      
+
+      if(data.errors){
+        setResults(data.errors);
+        return;
+      }
+
       // SET STATE - results
       setResults(data.data)
-      setQuerySubjects(querySubjects)
+      setQuerySubjects(querySubjects);
     })
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log(myQuery);
-        //console.log(data.errors)
-        if (data.errors) {
-          data.errors[0].custom = 'my test message';
-          console.log(data.errors);
-          console.log(data.errors.message);
-          setResults(data.errors);
-          return;
-        }
-
-        // SET STATE - results
-        setResults([data.data]);
-      })
       .catch((err) => {
         console.log(err);
       });
