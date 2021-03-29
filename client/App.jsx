@@ -93,6 +93,7 @@ query {
         console.log(buildClientSchema(schemaJSON.data));
       });
   }, []);
+    
   return (
     <div className="main-container">
       <div className='content-wrap'>
