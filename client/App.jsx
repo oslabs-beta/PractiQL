@@ -31,24 +31,44 @@ query {
   }
 }
 =============================================
+query myquery {
+	continents {
+    name
+  },
+	continents {
+    code
+  }
+}
+
+
+query myquery {
+continents_name : continents {
+    name
+  },
+continents_code : continents {
+    code
+  }
+}
+
 query {
-  continents {
+  countries {
     name
   }
 }
 
 query {
-  continents {
-    code
+  languages {
+    name
   }
 }
+
 */
 
   const outputs = [];
   for (let i = 0; i < querySubjects.length; i++){
     outputs.push(<Output key={i} id={i} language='javascript' value={results[querySubjects[i]]} />)
   }
-
+  
   useEffect(() => {
     // 'https://graphql-pokemon2.vercel.app'
     fetch('https://countries.trevorblades.com/', {
