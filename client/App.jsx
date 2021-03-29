@@ -58,17 +58,37 @@ query {
   }
 }
 =============================================
+query myquery {
+	continents {
+    name
+  },
+	continents {
+    code
+  }
+}
+
+
+query myquery {
+continents_name : continents {
+    name
+  },
+continents_code : continents {
+    code
+  }
+}
+
 query {
-  continents {
+  countries {
     name
   }
 }
 
 query {
-  continents {
-    code
+  languages {
+    name
   }
 }
+
 */
 
   const outputs = [];
@@ -78,14 +98,6 @@ query {
     }
   }
   
-    // iterate through output
-  // for every output, append value of JSON.stringify(output)
-
-  // useEffect(() => {
-  //   console.log("R: ", results);
-  //   console.log('QS: ', querySubjects);
-  // }, [results, querySubjects])
-
   useEffect(() => {
     // 'https://graphql-pokemon2.vercel.app'
     fetch('https://countries.trevorblades.com/', {
@@ -104,7 +116,7 @@ query {
         console.log(buildClientSchema(schemaJSON.data));
       });
   }, []);
-
+    
   return (
     <div className="main-container">
       <div className='content-wrap'>
@@ -122,7 +134,7 @@ query {
             />
             <div className="output-container-outer output-container-outer--nord">
               {/* {outputs} */}
-            <Output language='javascript' results={results ? results : undefined} numOfQueries={querySubjects.length} theme={myTheme}/>
+            <Output language='graphql-results' results={results ? results : undefined} numOfQueries={querySubjects.length} theme={myTheme}/>
             </div>
           </div>
       </div>

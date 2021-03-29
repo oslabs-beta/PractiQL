@@ -11,16 +11,40 @@ export default function TopBar(props) {
     let myQuery = 'query myquery {\r\n';
 
     for (let i = 0; i < arrItems.length; i++){
-      myQuery += arrItems[i].trim() + (i < arrItems.length - 1 ? ',\r\n' : '\r\n');
     
-      const x = arrItems[i].substring(0, arrItems[i].indexOf('{')).trim();
-      querySubjects.push(x);
+     const x = arrItems[i];
+     
+      // IS THIS A MERGED QUERY?
+      if (x.includes(',')) {
 
-//console.log(querySubjects)
+        const items = x.split(',');
 
-      console.log(arrItems[i]);
+        for (let i = 0; i < items.length; i++) {
+          // DOES THIS item HAVE AN ALIAS?
+          if (items[i].includes(':')) {
+            querySubjects.push(items[i].substring(0, items[i].indexOf(':')).trim());
+
+            myQuery += items[i] + (i < items.length - 1 ? ',\r\n' : '\r\n');
+          } else {
+            // ADD ALIAS TO RETURN MULTIPLE RESULTSETS
+            const alias = items[i].substring(0, items[i].indexOf('{')).trim() + '_' + i.toString();
+            querySubjects.push(alias);
+
+            myQuery += alias + ' : ' + items[i] + (i < items.length - 1 ? ',\r\n' : '\r\n');
+          }
+        }
+      } else {
+        // DOES THIS item HAVE AN ALIAS?
+        if (x.includes(':')) {
+          querySubjects.push(x.substring(0, x.indexOf(':')).trim());
+        } else {
+          querySubjects.push(x.substring(0, x.indexOf('{')).trim());
+        }
+        myQuery += arrItems[i].trim() + (i < arrItems.length - 1 ? ',\r\n' : '\r\n');
+      }
+
     }
-    
+  
     myQuery += '}';
 
     fetch('https://countries.trevorblades.com', {
@@ -33,21 +57,23 @@ export default function TopBar(props) {
     .then(res => res.json())
     .then(data => {
 
-// console.log(myQuery);
-// console.log(data.data)
+console.log(111, myQuery);      
+console.log(222, data.data);
+console.log(333, querySubjects);
 
-      if(data.errors){
+      if (data.errors) {
         setResults(data.errors);
         return;
       }
-
+      
       // SET STATE - results
-      setResults(data.data)
-      setQuerySubjects(querySubjects);
+      setResults(data.data);
+      setQuerySubjects(querySubjects)
+
     })
-      .catch((err) => {
-        console.log(err);
-      });
+    .catch((err) => {
+      console.log(err);
+    });
   };
 
   function matchRecursiveRegExp(str, left, right) {
