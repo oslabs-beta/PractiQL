@@ -38,11 +38,19 @@ export default function TopBar(props) {
         if (x.includes(':')) {
           querySubjects.push(x.substring(0, x.indexOf(':')).trim());
         } else {
-          querySubjects.push(x.substring(0, x.indexOf('{')).trim());
-        }
-        myQuery += arrItems[i].trim() + (i < arrItems.length - 1 ? ',\r\n' : '\r\n');
-      }
 
+          let alias;
+          const query = x.substring(0, x.indexOf('{')).trim();
+          const repeat = querySubjects.includes(query);
+          if (repeat) {
+            // CREATE AN ALIAS
+            alias = query + '_' + i.toString();
+          } 
+
+          querySubjects.push(repeat ? alias : query);
+          myQuery += (repeat ? alias + ' : ' : '') + arrItems[i].trim() + (i < arrItems.length - 1 ? ',\r\n' : '\r\n');
+        }
+      }
     }
   
     myQuery += '}';

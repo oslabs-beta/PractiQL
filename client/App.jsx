@@ -86,7 +86,19 @@ query {
     name
   }
 }
+// ===============================================
 
+query {
+continents {
+    name
+  }
+}
+  
+query {
+continents {
+    code
+  }
+}
 */
 
   const outputs = [];
