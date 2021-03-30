@@ -207,7 +207,7 @@ export default function Input(props) {
             schema: schema,
           },
           lineNumbers: true,
-          theme: 'neo',
+          theme: 'nord',
           extraKeys: { 'Ctrl-Space': 'autocomplete' },
         }}
       />

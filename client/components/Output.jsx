@@ -69,7 +69,7 @@ export default function Output(props) {
           mode: 'javascript',
           lineNumbers: false,
           readOnly: true,
-          theme: 'neo',
+          theme: 'nord',
           scrollbarStyle: 'overlay',
         }}
       ></ControlledEditor>
