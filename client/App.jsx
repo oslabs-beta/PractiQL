@@ -19,8 +19,10 @@ import 'codemirror-graphql/hint';
 import 'codemirror-graphql/lint';
 import 'codemirror-graphql/mode';
 import 'codemirror/mode/javascript/javascript';
-import 'codemirror/addon/scroll/simplescrollbars';
 import 'codemirror/addon/scroll/simplescrollbars.css';
+import 'codemirror/addon/scroll/simplescrollbars';
+import 'codemirror-graphql/results/mode'
+
 
 
 
@@ -30,8 +32,8 @@ export default function App(props) {
   const [input, setInput] = useState('');
   const [selection, setSelection] = useState('');
   const [myTheme, setMyTheme] = useState(theme);
-  const [results, setResults] = useState('');
-  const [querySubjects, setQuerySubjects] = useState('');
+  const [results, setResults] = useState(false);
+  const [querySubjects, setQuerySubjects] = useState([]);
   const [schema, setSchema] = useState('');
 
   
@@ -90,8 +92,10 @@ query {
 */
 
   const outputs = [];
-  for (let i = 0; i < querySubjects.length; i++){
+  if(results) {
+    for (let i = 0; i < querySubjects.length; i++){
     outputs.push(<Output key={i} id={i} language='javascript' value={results[querySubjects[i]]} theme={myTheme}/>)
+    }
   }
   
   useEffect(() => {
@@ -108,7 +112,6 @@ query {
     })
       .then((res) => res.json())
       .then((schemaJSON) => {
-        console.log(schemaJSON);
         setSchema(buildClientSchema(schemaJSON.data));
         console.log(buildClientSchema(schemaJSON.data));
       });
@@ -130,7 +133,8 @@ query {
               schema={schema}
             />
             <div className="output-container-outer output-container-outer--nord">
-              {outputs}
+              {/* {outputs} */}
+            <Output language='graphql-results' results={results ? results : undefined} numOfQueries={querySubjects.length} theme={myTheme}/>
             </div>
           </div>
       </div>
