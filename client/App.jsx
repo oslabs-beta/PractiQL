@@ -1,17 +1,44 @@
 import React, { useState, useEffect } from 'react';
+import { getIntrospectionQuery, buildClientSchema } from 'graphql';
 import Output from './components/Output';
 import TopBar from './components/TopBar';
 import Input from './components/Input';
-import { getIntrospectionQuery, buildClientSchema } from 'graphql';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/neo.css';
+import 'codemirror/theme/nord.css';
+import 'codemirror/theme/base16-light.css';
+import 'codemirror/addon/hint/show-hint.css';
+import 'codemirror/addon/hint/show-hint';
+import 'codemirror/addon/lint/lint';
+import 'codemirror/addon/edit/matchbrackets.js';
+import 'codemirror/addon/edit/closebrackets.js';
+import 'codemirror/addon/fold/foldgutter';
+import 'codemirror/addon/fold/brace-fold';
+import 'codemirror/addon/fold/foldgutter.css';
+import 'codemirror-graphql/hint';
+import 'codemirror-graphql/lint';
+import 'codemirror-graphql/mode';
+import 'codemirror/mode/javascript/javascript';
+import 'codemirror/addon/scroll/simplescrollbars.css';
+import 'codemirror/addon/scroll/simplescrollbars';
+import 'codemirror-graphql/results/mode'
 
-export default function App() {
+
+
+
+export default function App(props) {
+  const { theme, endpoint } = props;
+
   const [input, setInput] = useState('');
   const [selection, setSelection] = useState('');
-
-  const [results, setResults] = useState('');
-  const [querySubjects, setQuerySubjects] = useState('');
+  const [myTheme, setMyTheme] = useState(theme);
+  const [results, setResults] = useState(false);
+  const [querySubjects, setQuerySubjects] = useState([]);
   const [schema, setSchema] = useState('');
 
+  
+
+  
   /*
 query {
   continents {
@@ -31,24 +58,58 @@ query {
   }
 }
 =============================================
+query myquery {
+	continents {
+    name
+  },
+	continents {
+    code
+  }
+}
+
+
+query myquery {
+continents_name : continents {
+    name
+  },
+continents_code : continents {
+    code
+  }
+}
+
 query {
-  continents {
+  countries {
     name
   }
 }
 
 query {
-  continents {
+  languages {
+    name
+  }
+}
+// ===============================================
+
+query {
+continents {
+    name
+  }
+}
+  
+query {
+continents {
     code
   }
 }
 */
 
   const outputs = [];
-  for (let i = 0; i < querySubjects.length; i++){
-    outputs.push(<Output key={i} id={i} language='javascript' value={results[querySubjects[i]]} />)
+  if(results) {
+    for (let i = 0; i < querySubjects.length; i++){
+    outputs.push(<Output key={i} id={i} language='javascript' value={results[querySubjects[i]]} theme={myTheme}/>)
+    }
   }
-
+  
   useEffect(() => {
     // 'https://graphql-pokemon2.vercel.app'
     fetch('https://countries.trevorblades.com/', {
@@ -63,29 +124,31 @@ query {
     })
       .then((res) => res.json())
       .then((schemaJSON) => {
-        console.log(schemaJSON);
         setSchema(buildClientSchema(schemaJSON.data));
         console.log(buildClientSchema(schemaJSON.data));
       });
   }, []);
-
+    
   return (
     <div className="main-container">
-    <TopBar input={input} selection={selection} setResults={setResults} setQuerySubjects={setQuerySubjects} />
-
-      <div className="io-container">
-        <Input
-          value={input}
-          onChange={setInput}
-          selection={selection}
-          onSelectionChange={setSelection}
-          schema={schema}
-        />
-        <div className="output-container-outer output-container-outer--nord">
-
-          {outputs}
-
+      <div className='content-wrap'>
+        <div className='top-bar-wrap'>
+          <TopBar input={input} selection={selection} setResults={setResults} setQuerySubjects={setQuerySubjects} />
         </div>
+          <div className="io-container">
+            <Input
+              theme={myTheme}
+              value={input}
+              onChange={setInput}
+              selection={selection}
+              onSelectionChange={setSelection}
+              schema={schema}
+            />
+            <div className="output-container-outer output-container-outer--nord">
+              {/* {outputs} */}
+            <Output language='graphql-results' results={results ? results : undefined} numOfQueries={querySubjects.length} theme={myTheme}/>
+            </div>
+          </div>
       </div>
     </div>
   );

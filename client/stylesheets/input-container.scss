@@ -1,11 +1,23 @@
 .input-container-outer {
-  flex-grow: 1;
-  flex-basis: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1 1 0%;
+  // border: 5px solid brown;
 }
 
 .input-container-inner {
-  flex-grow: 1;
-  overflow: hidden;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  position: relative;
+  // background-color: $nord-primary;
+  // border: 5px solid pink;
+  // overflow-y: hidden;
 }

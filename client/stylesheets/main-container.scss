@@ -1,7 +1,14 @@
 .main-container {
-  box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  max-height: 100vh;
-  overflow: scroll;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  width: 100%;
+  // border: 5px solid green;
 }

@@ -5,7 +5,7 @@
 */
 .top-bar--nord {
   background: none;
-  background: linear-gradient(#2e3440 45%, $nord-black);
+  background: linear-gradient($nord-primary 45%, $nord-black);
   border-bottom: 1px solid black;
 }
 
@@ -26,6 +26,7 @@
 
 .output-container-outer--nord {
   border-left-color: $nord-black;
+  background-color: $nord-primary;
 }
 
 .output-container-inner--nord {
