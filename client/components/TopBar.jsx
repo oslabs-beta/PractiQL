@@ -9,11 +9,11 @@ export default function TopBar(props) {
 
     let querySubjects = [];
     let myQuery = 'query myquery {\r\n';
-
+    
+console.log(111, arrItems)
     for (let i = 0; i < arrItems.length; i++){
     
      const x = arrItems[i];
-     
       // IS THIS A MERGED QUERY?
       if (x.includes(',')) {
 
@@ -35,7 +35,7 @@ export default function TopBar(props) {
         }
       } else {
         // DOES THIS item HAVE AN ALIAS?
-        if (x.includes(':')) {
+        if (!x.trimStart().startsWith('__') && x.includes(':')) {
           querySubjects.push(x.substring(0, x.indexOf(':')).trim());
         } else {
 
@@ -65,9 +65,9 @@ export default function TopBar(props) {
     .then(res => res.json())
     .then(data => {
 
-console.log(111, myQuery);      
-console.log(222, data.data);
-console.log(333, querySubjects);
+console.log(222, myQuery);      
+console.log(333, data.data);
+console.log(444, querySubjects);
 
       if (data.errors) {
         setResults(data.errors);
