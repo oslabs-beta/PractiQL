@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getIntrospectionQuery, buildClientSchema } from 'graphql';
+import { getIntrospectionQuery, buildClientSchema, parse, buildASTSchema, buildSchema, printSchema} from 'graphql';
 import Output from './components/Output';
 import TopBar from './components/TopBar';
 import Input from './components/Input';
@@ -22,6 +22,8 @@ import 'codemirror/mode/javascript/javascript';
 import 'codemirror/addon/scroll/simplescrollbars.css';
 import 'codemirror/addon/scroll/simplescrollbars';
 import 'codemirror-graphql/results/mode'
+import Tree from './components/Tree.jsx';
+import createTree from '../helpers/createTree.js';
 
 
 
@@ -35,6 +37,7 @@ export default function App(props) {
   const [results, setResults] = useState(false);
   const [querySubjects, setQuerySubjects] = useState([]);
   const [schema, setSchema] = useState('');
+  const [treeObj, setTreeObj] = useState({});
 
   
 
@@ -88,7 +91,34 @@ query {
     name
   }
 }
+// ===============================================
 
+query {
+continents {
+    name
+  }
+}
+  
+query {
+continents {
+    code
+  }
+}
+
+// ===============================================
+
+{
+  __type(name: "continents") {
+    name
+    fields {
+      name
+      type {
+        name
+        kind
+      }
+    }
+  } 
+}
 */
 
   const outputs = [];
@@ -99,8 +129,9 @@ query {
   }
   
   useEffect(() => {
-    // 'https://graphql-pokemon2.vercel.app'
-    fetch('https://countries.trevorblades.com/', {
+    
+    // 'https://countries.trevorblades.com/' 'https://graphql-pokemon2.vercel.app'
+    fetch('https://api.spacex.land/graphql/', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -116,7 +147,19 @@ query {
         console.log(buildClientSchema(schemaJSON.data));
       });
   }, []);
-    
+
+  useEffect(() => {
+    if(schema){
+      // const validSchema = buildSchema(printSchema(schema));
+      // const allTypes = validSchema.getTypeMap();
+      // const allTypesAst = Object.keys(allTypes).map(key => allTypes[key].astNode);
+      // console.log(allTypesAst);
+      // console.log(schema._typeMap);
+      console.log(createTree(schema));
+      setTreeObj(createTree(schema));
+    }
+  }, [schema])
+
   return (
     <div className="main-container">
       <div className='content-wrap'>
@@ -124,6 +167,7 @@ query {
           <TopBar input={input} selection={selection} setResults={setResults} setQuerySubjects={setQuerySubjects} />
         </div>
           <div className="io-container">
+
             <Input
               theme={myTheme}
               value={input}
@@ -134,7 +178,13 @@ query {
             />
             <div className="output-container-outer output-container-outer--nord">
               {/* {outputs} */}
-            <Output language='graphql-results' results={results ? results : undefined} numOfQueries={querySubjects.length} theme={myTheme}/>
+            <Output language='javascript' results={results ? results : undefined} numOfQueries={querySubjects.length} theme={myTheme}/>
+            </div>
+
+            <div className='outter-tree-wrap'>
+              <div className='inner-tree-wrap'>
+                <Tree tree={treeObj}/>
+              </div>
             </div>
           </div>
       </div>
