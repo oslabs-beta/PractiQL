@@ -130,8 +130,8 @@ continents {
   
   useEffect(() => {
     
-    // 'https://graphql-pokemon2.vercel.app'
-    fetch('https://countries.trevorblades.com/', {
+    // 'https://countries.trevorblades.com/' 'https://graphql-pokemon2.vercel.app'
+    fetch('https://api.spacex.land/graphql/', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -167,7 +167,7 @@ continents {
           <TopBar input={input} selection={selection} setResults={setResults} setQuerySubjects={setQuerySubjects} />
         </div>
           <div className="io-container">
-            <Tree tree={treeObj}/>
+
             <Input
               theme={myTheme}
               value={input}
@@ -179,6 +179,12 @@ continents {
             <div className="output-container-outer output-container-outer--nord">
               {/* {outputs} */}
             <Output language='javascript' results={results ? results : undefined} numOfQueries={querySubjects.length} theme={myTheme}/>
+            </div>
+
+            <div className='outter-tree-wrap'>
+              <div className='inner-tree-wrap'>
+                <Tree tree={treeObj}/>
+              </div>
             </div>
           </div>
       </div>

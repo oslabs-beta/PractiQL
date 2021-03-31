@@ -54,8 +54,8 @@ console.log(111, arrItems)
     }
   
     myQuery += '}';
-
-    fetch('https://countries.trevorblades.com', {
+// 'https://countries.trevorblades.com'
+    fetch('https://api.spacex.land/graphql/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
