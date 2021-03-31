@@ -1,5 +1,5 @@
 export default function createTree(schema) {
-  const cache = {};
+  // const cache = {};
   const myTree = {
     name: schema._queryType.name,
     children: []
@@ -29,7 +29,7 @@ export default function createTree(schema) {
 
     console.log(typeDef.name, ' : ', innerChildren);
 
-    cache[field.name] = typeDef
+    // cache[field.name] = typeDef
     myTree.children.push(typeDef);
   });
 
@@ -46,10 +46,10 @@ export default function createTree(schema) {
   }
 
   function getChildren(child) {
-    if(cache[child.name]) {
-      console.log(cache);
-      return cache[child.name];
-    }
+    // if(cache[child.name]) {
+    //   console.log(cache);
+    //   return cache[child.name];
+    // }
     const typeDef = {};
     const attributes = {};
     const children = [];
@@ -80,9 +80,9 @@ export default function createTree(schema) {
 
     // console.log(typeDef.name, ' : ', innerChildren);
 
-    cache[child.name] = typeDef
+    // cache[child.name] = typeDef
     return typeDef;
   }
-
+  console.log(myTree);
   return myTree
 }

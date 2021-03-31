@@ -167,7 +167,7 @@ continents {
           <TopBar input={input} selection={selection} setResults={setResults} setQuerySubjects={setQuerySubjects} />
         </div>
           <div className="io-container">
-            <Tree data={treeObj}/>
+            <Tree tree={treeObj}/>
             <Input
               theme={myTheme}
               value={input}
