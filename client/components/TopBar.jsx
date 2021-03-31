@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function TopBar(props) {
-  const { input, selection, setResults, setQuerySubjects } = props;
+  const { input, selection, setResults, setQuerySubjects, URL } = props;
+  const [endPoint, setEndPoint] = useState(URL);
 
   const handleClick = () => {
     const sel = selection ? selection.trim() : input.trim();
@@ -63,7 +64,7 @@ export default function TopBar(props) {
     }
 
     myQuery += '}';
-    fetch(props.URL, {
+    fetch(endPoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -112,12 +113,24 @@ export default function TopBar(props) {
     return a;
   }
 
+  const handleChange = (e) => {
+    // changes made to input are reset as endPoint to fetch
+    console.log('TopBar.jsx: change detected');
+    const inputValue = e.target.value;
+    console.log(inputValue);
+  };
+
   return (
     <div className="top-bar top-bar--nord">
       <span className="logo logo--nord">PractiQL</span>
       <button className="send-btn send-btn--nord" onClick={handleClick}>
         Send
       </button>
+      <input
+        type="input"
+        onChange={handleChange}
+        placeholder="Enter new GraphQL endpoint here"
+      ></input>
     </div>
   );
 }
