@@ -104,6 +104,21 @@ continents {
     code
   }
 }
+
+// ===============================================
+
+{
+  __type(name: "continents") {
+    name
+    fields {
+      name
+      type {
+        name
+        kind
+      }
+    }
+  } 
+}
 */
 
   const outputs = [];
