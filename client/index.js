@@ -4,6 +4,6 @@ import App from './App';
 import styles from './stylesheets/styles.scss';
 
 render(
-  <App URL={'https://api.spacex.land/graphql/'} theme={'nord'} />,
+  <App endpoint={'https://api.spacex.land/graphql/'} theme={'nord'} />,
   document.getElementById('root')
 );

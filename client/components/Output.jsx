@@ -30,43 +30,23 @@ export default function Output(props) {
     console.log('Output.jsx: useEffect invoked');
     if (editorToGrab) {
       console.log('Output.jsx: in if');
+      // Create a Codemirror headless that means in the bg, and not attached to the DOM
       let count = 1;
       let lastLine = 0;
-      console.log(results);
       for (let key in results) {
         const instance = new CodeMirror(document.getElementById('hidden'), {
           value: JSON.stringify(results[key], null, 2),
         });
-        console.log(count);
-        if (count > 1) {
-          // editorToGrab.foldCode(1);
-          // editorToGrab.foldCode(25);
+
+        if (count === 1) {
+          editorToGrab.foldCode(1);
+        } else {
+          editorToGrab.foldCode(lastLine + 1);
         }
-        console.log(key + ' lastLine: ' + instance.lastLine());
-        console.log(key + ' lineCount: ' + instance.lineCount());
         count++;
+        lastLine += instance.lineCount();
+        console.log(key + ' lastline: ' + lastLine);
       }
-      editorToGrab.foldCode(28);
-      editorToGrab.foldCode(26);
-      editorToGrab.foldCode(25);
-      editorToGrab.foldCode(24);
-      editorToGrab.foldCode(1);
-      //   for (let key in results) {
-      //     const instance = new CodeMirror(document.getElementById('hidden'), {
-      //       value: JSON.stringify(results[key], null, 2),
-      //     });
-      //     // create a CodeMirror instance not attached to the DOM
-      //     console.log(key + ' lastLine: ' + instance.lastLine());
-      //     console.log(key + ' lineCount: ' + instance.lineCount());
-      //     // if (count === 1) {
-      //     //   editorToGrab.foldCode(1);
-      //     // } else {
-      //     //   editorToGrab.foldCode(lastLine + 2);
-      //     // }
-      //     // count++;
-      //     // lastLine += instance.lineCount();
-      //     // console.log(key + ' lastline: ' + lastLine);
-      //   }
     }
     console.log('Output.jsx: end of useEffect');
   }, [results]);

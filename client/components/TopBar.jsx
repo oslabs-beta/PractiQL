@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 export default function TopBar(props) {
-  const { input, selection, setResults, setQuerySubjects, URL } = props;
-  const [endPoint, setEndPoint] = useState(URL);
+  const { input, selection, setResults, setQuerySubjects, endpoint } = props;
+  const [stateEndpoint, setStateEndpoint] = useState(endpoint);
 
   const handleClick = () => {
     const sel = selection ? selection.trim() : input.trim();
@@ -64,7 +64,7 @@ export default function TopBar(props) {
     }
 
     myQuery += '}';
-    fetch(endPoint, {
+    fetch(stateEndpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -113,11 +113,11 @@ export default function TopBar(props) {
     return a;
   }
 
-  const handleChange = (e) => {
-    // changes made to input are reset as endPoint to fetch
-    console.log('TopBar.jsx: change detected');
-    const inputValue = e.target.value;
-    console.log(inputValue);
+  const handleBtnClick = (e) => {
+    // changes made to input are reset as endpoint to fetch
+    console.log('TopBar.jsx: btnClick detected');
+    const inputValue = document.getElementById('endpoint-input').value;
+    setStateEndpoint(inputValue);
   };
 
   return (
@@ -127,10 +127,12 @@ export default function TopBar(props) {
         Send
       </button>
       <input
+        style={{ width: '12rem' }}
+        id="endpoint-input"
         type="input"
-        onChange={handleChange}
         placeholder="Enter new GraphQL endpoint here"
       ></input>
+      <button onClick={handleBtnClick}>Set endpoint</button>
     </div>
   );
 }

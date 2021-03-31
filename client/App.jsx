@@ -137,7 +137,8 @@ continents {
   }
 
   useEffect(() => {
-    fetch(props.URL, {
+    console.log('App.jsx: useEffect invoked');
+    fetch(endpoint, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -150,7 +151,7 @@ continents {
       .then((res) => res.json())
       .then((schemaJSON) => {
         setSchema(buildClientSchema(schemaJSON.data));
-        console.log(buildClientSchema(schemaJSON.data));
+        // console.log(buildClientSchema(schemaJSON.data));
       });
   }, []);
 
@@ -161,7 +162,7 @@ continents {
       // const allTypesAst = Object.keys(allTypes).map(key => allTypes[key].astNode);
       // console.log(allTypesAst);
       // console.log(schema._typeMap);
-      console.log(createTree(schema));
+      // console.log(createTree(schema));
       setTreeObj(createTree(schema));
     }
   }, [schema]);
@@ -171,7 +172,7 @@ continents {
       <div className="content-wrap">
         <div className="top-bar-wrap">
           <TopBar
-            URL={props.URL}
+            endpoint={endpoint}
             input={input}
             selection={selection}
             setResults={setResults}

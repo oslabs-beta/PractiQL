@@ -2,11 +2,11 @@ export default function createTree(schema) {
   // const cache = {};
   const myTree = {
     name: schema._queryType.name,
-    children: []
-  }
+    children: [],
+  };
 
   const mainFields = Object.values(schema._queryType._fields);
-  console.log(mainFields);
+  // console.log(mainFields);
 
   mainFields.forEach((field) => {
     const typeDef = {};
@@ -27,7 +27,7 @@ export default function createTree(schema) {
     typeDef.attributes = attributes;
     typeDef.children = children;
 
-    console.log(typeDef.name, ' : ', innerChildren);
+    // console.log(typeDef.name, ' : ', innerChildren);
 
     // cache[field.name] = typeDef
     myTree.children.push(typeDef);
@@ -35,7 +35,7 @@ export default function createTree(schema) {
 
   // console.log('TREE: ', myTree)
   function findType(type) {
-    if (type.name) return {name: type.name, description: type.description};
+    if (type.name) return { name: type.name, description: type.description };
     // console.log(type.ofType);
     return findType(type.ofType);
   }
@@ -54,7 +54,7 @@ export default function createTree(schema) {
     const attributes = {};
     const children = [];
 
-    for(let i = 0; i < child.args.length; i++) {
+    for (let i = 0; i < child.args.length; i++) {
       attributes[child.args[i].name] = findType(child.args[i].type).name;
     }
 
@@ -69,20 +69,20 @@ export default function createTree(schema) {
     // }
 
     const innerChild = findType(child.type);
-    children.push({name: innerChild.name, attributes: {description: innerChild.description}});
-
-    
+    children.push({
+      name: innerChild.name,
+      attributes: { description: innerChild.description },
+    });
 
     typeDef.name = child.name;
     typeDef.attributes = attributes;
     typeDef.children = children;
-
 
     // console.log(typeDef.name, ' : ', innerChildren);
 
     // cache[child.name] = typeDef
     return typeDef;
   }
-  console.log(myTree);
-  return myTree
+  // console.log(myTree);
+  return myTree;
 }
