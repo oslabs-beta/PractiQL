@@ -15,10 +15,11 @@ export default function Output(props) {
   } = props;
 
   useEffect(() => {
+    // Returns results folded
+    // How: copies the results into a headless CodeMirror instance that attaches to #hidden. This headless instance is used to count lines and identify where to fold code
     console.log('Output.jsx: useEffect invoked');
     if (editorToGrab) {
       console.log('Output.jsx: in if');
-      // Create a Codemirror headless that means in the bg, and not attached to the DOM
       let count = 1;
       let lastLine = 0;
       for (let key in results) {
@@ -36,6 +37,8 @@ export default function Output(props) {
         console.log(key + ' lastline: ' + lastLine);
       }
     }
+    // Cleans CodeMirror instances from DOM
+    document.getElementById('hidden').innerHTML = '';
     console.log('Output.jsx: end of useEffect');
   }, [results]);
 
