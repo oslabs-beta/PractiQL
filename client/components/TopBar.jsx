@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 
 export default function TopBar(props) {
-  const { input, selection, setResults, setQuerySubjects, endpoint } = props;
-  const [stateEndpoint, setStateEndpoint] = useState(endpoint);
+  const { endpoint, input, selection, setResults, setQuerySubjects } = props;
 
   const handleClick = () => {
     const sel = selection ? selection.trim() : input.trim();
@@ -64,7 +63,8 @@ export default function TopBar(props) {
     }
 
     myQuery += '}';
-    fetch(stateEndpoint, {
+    console.log('TopBar.jsx: fetching to ' + endpoint);
+    fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -113,12 +113,12 @@ export default function TopBar(props) {
     return a;
   }
 
-  const handleBtnClick = (e) => {
-    // changes made to input are reset as endpoint to fetch
-    console.log('TopBar.jsx: btnClick detected');
+  function handleBtnClick() {
+    // passes value of input to props.handleBtnClick
     const inputValue = document.getElementById('endpoint-input').value;
-    setStateEndpoint(inputValue);
-  };
+    props.handleBtnClick(inputValue);
+    // props.handleBtnClick(document.getElementById('endpoint-input').value);
+  }
 
   return (
     <div className="top-bar top-bar--nord">

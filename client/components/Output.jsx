@@ -14,18 +14,6 @@ export default function Output(props) {
     numOfQueries,
   } = props;
 
-  // {
-  //   continents{
-  //     name
-  //   }
-  // }
-
-  // {
-  //   languages{
-  //     name
-  //   }
-  // }
-
   useEffect(() => {
     console.log('Output.jsx: useEffect invoked');
     if (editorToGrab) {

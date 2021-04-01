@@ -41,7 +41,7 @@ export default function App(props) {
   const [querySubjects, setQuerySubjects] = useState([]);
   const [schema, setSchema] = useState('');
   const [treeObj, setTreeObj] = useState({});
-
+  const [stateEndpoint, setStateEndpoint] = useState(endpoint);
   /*
 query {
   continents {
@@ -136,9 +136,16 @@ continents {
     }
   }
 
+  const handleBtnClick = (newEndpoint) => {
+    console.log('App.jsx: btnClick detected');
+    console.log(newEndpoint);
+    setStateEndpoint(newEndpoint);
+    setQuerySubjects([]);
+  };
+
   useEffect(() => {
     console.log('App.jsx: useEffect invoked');
-    fetch(endpoint, {
+    fetch(stateEndpoint, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -153,7 +160,7 @@ continents {
         setSchema(buildClientSchema(schemaJSON.data));
         // console.log(buildClientSchema(schemaJSON.data));
       });
-  }, []);
+  }, [stateEndpoint]);
 
   useEffect(() => {
     if (schema) {
@@ -172,7 +179,8 @@ continents {
       <div className="content-wrap">
         <div className="top-bar-wrap">
           <TopBar
-            endpoint={endpoint}
+            handleBtnClick={handleBtnClick}
+            endpoint={stateEndpoint}
             input={input}
             selection={selection}
             setResults={setResults}
@@ -189,7 +197,6 @@ continents {
             schema={schema}
           />
           <div className="output-container-outer output-container-outer--nord">
-            {/* {outputs} */}
             <Output
               language="javascript"
               results={results ? results : undefined}
