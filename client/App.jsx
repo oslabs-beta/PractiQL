@@ -42,84 +42,6 @@ export default function App(props) {
   const [schema, setSchema] = useState('');
   const [treeObj, setTreeObj] = useState({});
   const [stateEndpoint, setStateEndpoint] = useState(endpoint);
-  /*
-query {
-  continents {
-    name
-  }
-}
-
-query {
-  countries {
-    name
-  }
-}
-
-query {
-  languages {
-    name
-  }
-}
-=============================================
-query myquery {
-	continents {
-    name
-  },
-	continents {
-    code
-  }
-}
-
-
-query myquery {
-continents_name : continents {
-    name
-  },
-continents_code : continents {
-    code
-  }
-}
-
-query {
-  countries {
-    name
-  }
-}
-
-query {
-  languages {
-    name
-  }
-}
-// ===============================================
-
-query {
-continents {
-    name
-  }
-}
-  
-query {
-continents {
-    code
-  }
-}
-
-// ===============================================
-
-{
-  __type(name: "continents") {
-    name
-    fields {
-      name
-      type {
-        name
-        kind
-      }
-    }
-  } 
-}
-*/
 
   const outputs = [];
   if (results) {
@@ -137,7 +59,7 @@ continents {
   }
 
   const handleBtnClick = (newEndpoint) => {
-    // Sets new endpoint.
+    // Sets new endpoint
     console.log('App.jsx: btnClick detected');
     setStateEndpoint(newEndpoint);
     setQuerySubjects([]);
