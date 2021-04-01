@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { getIntrospectionQuery, buildClientSchema, parse, buildASTSchema, buildSchema, printSchema} from 'graphql';
+import {
+  getIntrospectionQuery,
+  buildClientSchema,
+  parse,
+  buildASTSchema,
+  buildSchema,
+  printSchema,
+} from 'graphql';
 import Output from './components/Output';
 import TopBar from './components/TopBar';
 import Input from './components/Input';
@@ -21,16 +28,12 @@ import 'codemirror-graphql/mode';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/addon/scroll/simplescrollbars.css';
 import 'codemirror/addon/scroll/simplescrollbars';
-import 'codemirror-graphql/results/mode'
+import 'codemirror-graphql/results/mode';
 import Tree from './components/Tree.jsx';
 import createTree from '../helpers/createTree.js';
 
-
-
-
 export default function App(props) {
   const { theme, endpoint } = props;
-
   const [input, setInput] = useState('');
   const [selection, setSelection] = useState('');
   const [myTheme, setMyTheme] = useState(theme);
@@ -38,10 +41,7 @@ export default function App(props) {
   const [querySubjects, setQuerySubjects] = useState([]);
   const [schema, setSchema] = useState('');
   const [treeObj, setTreeObj] = useState({});
-
-  
-
-  
+  const [stateEndpoint, setStateEndpoint] = useState(endpoint);
   /*
 query {
   continents {
@@ -122,16 +122,30 @@ continents {
 */
 
   const outputs = [];
-  if(results) {
-    for (let i = 0; i < querySubjects.length; i++){
-    outputs.push(<Output key={i} id={i} language='javascript' value={results[querySubjects[i]]} theme={myTheme}/>)
+  if (results) {
+    for (let i = 0; i < querySubjects.length; i++) {
+      outputs.push(
+        <Output
+          key={i}
+          id={i}
+          language="javascript"
+          value={results[querySubjects[i]]}
+          theme={myTheme}
+        />
+      );
     }
   }
-  
+
+  const handleBtnClick = (newEndpoint) => {
+    // Sets new endpoint.
+    console.log('App.jsx: btnClick detected');
+    setStateEndpoint(newEndpoint);
+    setQuerySubjects([]);
+  };
+
   useEffect(() => {
-    
-    // 'https://countries.trevorblades.com/' 'https://graphql-pokemon2.vercel.app'
-    fetch('https://api.spacex.land/graphql/', {
+    console.log('App.jsx: useEffect invoked');
+    fetch(stateEndpoint, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -144,49 +158,59 @@ continents {
       .then((res) => res.json())
       .then((schemaJSON) => {
         setSchema(buildClientSchema(schemaJSON.data));
-        console.log(buildClientSchema(schemaJSON.data));
+        // console.log(buildClientSchema(schemaJSON.data));
       });
-  }, []);
+  }, [stateEndpoint]);
 
   useEffect(() => {
-    if(schema){
+    if (schema) {
       // const validSchema = buildSchema(printSchema(schema));
       // const allTypes = validSchema.getTypeMap();
       // const allTypesAst = Object.keys(allTypes).map(key => allTypes[key].astNode);
       // console.log(allTypesAst);
       // console.log(schema._typeMap);
-      console.log(createTree(schema));
+      // console.log(createTree(schema));
       setTreeObj(createTree(schema));
     }
-  }, [schema])
+  }, [schema]);
 
   return (
     <div className="main-container">
-      <div className='content-wrap'>
-        <div className='top-bar-wrap'>
-          <TopBar input={input} selection={selection} setResults={setResults} setQuerySubjects={setQuerySubjects} />
+      <div className="content-wrap">
+        <div className="top-bar-wrap">
+          <TopBar
+            handleBtnClick={handleBtnClick}
+            endpoint={stateEndpoint}
+            input={input}
+            selection={selection}
+            setResults={setResults}
+            setQuerySubjects={setQuerySubjects}
+          />
         </div>
-          <div className="io-container">
-
-            <Input
+        <div className="io-container">
+          <Input
+            theme={myTheme}
+            value={input}
+            onChange={setInput}
+            selection={selection}
+            onSelectionChange={setSelection}
+            schema={schema}
+          />
+          <div className="output-container-outer output-container-outer--nord">
+            <Output
+              language="javascript"
+              results={results ? results : undefined}
+              numOfQueries={querySubjects.length}
               theme={myTheme}
-              value={input}
-              onChange={setInput}
-              selection={selection}
-              onSelectionChange={setSelection}
-              schema={schema}
             />
-            <div className="output-container-outer output-container-outer--nord">
-              {/* {outputs} */}
-            <Output language='javascript' results={results ? results : undefined} numOfQueries={querySubjects.length} theme={myTheme}/>
-            </div>
+          </div>
 
-            <div className='outter-tree-wrap'>
-              <div className='inner-tree-wrap'>
-                <Tree tree={treeObj}/>
-              </div>
+          <div className="outter-tree-wrap">
+            <div className="inner-tree-wrap">
+              <Tree tree={treeObj} />
             </div>
           </div>
+        </div>
       </div>
     </div>
   );
