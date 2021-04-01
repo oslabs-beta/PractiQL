@@ -43,21 +43,6 @@ export default function App(props) {
   const [treeObj, setTreeObj] = useState({});
   const [stateEndpoint, setStateEndpoint] = useState(endpoint);
 
-  const outputs = [];
-  if (results) {
-    for (let i = 0; i < querySubjects.length; i++) {
-      outputs.push(
-        <Output
-          key={i}
-          id={i}
-          language="javascript"
-          value={results[querySubjects[i]]}
-          theme={myTheme}
-        />
-      );
-    }
-  }
-
   const handleBtnClick = (newEndpoint) => {
     // Sets new endpoint
     console.log('App.jsx: btnClick detected');
