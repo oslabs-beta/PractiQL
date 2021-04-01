@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 export default function TopBar(props) {
   const { endpoint, input, selection, setResults, setQuerySubjects } = props;
 
+  //  https://countries.trevorblades.com/
+
   const handleClick = () => {
     const sel = selection ? selection.trim() : input.trim();
     const arrItems = matchRecursiveRegExp(sel, '{', '}');
@@ -116,12 +118,13 @@ export default function TopBar(props) {
   function handleBtnClick() {
     // passes value of input to props.handleBtnClick
     const inputValue = document.getElementById('endpoint-input').value;
+
     props.handleBtnClick(inputValue);
-    // props.handleBtnClick(document.getElementById('endpoint-input').value);
+    document.getElementById('endpoint-input').value = '';
   }
 
   return (
-    <div className="top-bar top-bar--nord">
+    <div id="top-bar" className="top-bar top-bar--nord">
       <span className="logo logo--nord">PractiQL</span>
       <button className="send-btn send-btn--nord" onClick={handleClick}>
         Send

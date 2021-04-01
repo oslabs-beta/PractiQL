@@ -137,8 +137,8 @@ continents {
   }
 
   const handleBtnClick = (newEndpoint) => {
+    // Sets new endpoint.
     console.log('App.jsx: btnClick detected');
-    console.log(newEndpoint);
     setStateEndpoint(newEndpoint);
     setQuerySubjects([]);
   };
