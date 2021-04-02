@@ -62,13 +62,8 @@ export default function Output(props) {
           foldGutter: true,
           gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
           readOnly: true,
-<<<<<<< HEAD
-          theme: 'nord',
-          scrollbarStyle: 'overlay',
-=======
           theme: theme,
           scrollbarStyle: null,
->>>>>>> cc8ba142dc6f8f12b0920fe3b2193c1ff62769ee
         }}
       ></ControlledEditor>
     </>
