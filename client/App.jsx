@@ -92,8 +92,6 @@ export default function App(props) {
   };
 
   const handleAutoQuery = (query) => {
-    console.log('App.jsx: handleAutoQuery detected!');
-    console.log(query);
     setInput(query);
   };
 

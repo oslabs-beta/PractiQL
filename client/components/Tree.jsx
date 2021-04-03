@@ -11,9 +11,9 @@ export default function TreeExample(props) {
     if (cursor) {
       cursor.active = false;
     }
-
+    console.log(node);
     if (node.scalar) {
-      props.handleAutoQuery(autoQuery(node.autoQuery));
+      props.handleAutoQuery(autoQuery(node.autoQueryChain));
     }
 
     node.active = true;
