@@ -2,9 +2,15 @@ import React from 'react';
 import { Controlled as ControlledEditor } from 'react-codemirror2';
 import { ValidationContext, SDLValidationContext } from 'graphql';
 
-
 export default function Input(props) {
-  const { value, onChange, selection, onSelectionChange, schema, theme } = props;
+  const {
+    value,
+    onChange,
+    selection,
+    onSelectionChange,
+    schema,
+    theme,
+  } = props;
 
   function handleChange(editor, data, value) {
     onChange(value);

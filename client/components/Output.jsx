@@ -2,50 +2,42 @@ import CodeMirror, { overlayMode } from 'codemirror';
 import React, { useState, useEffect, useCallback } from 'react';
 import { Controlled as ControlledEditor } from 'react-codemirror2';
 
-
 export default function Output(props) {
   const [editorToGrab, setEditor] = useState(null);
   const [value, setValue] = useState('');
-  const { displayName, language, results, onChange, theme, numOfQueries } = props;
-  
-  useEffect(()=> {
+  const {
+    displayName,
+    language,
+    results,
+    onChange,
+    theme,
+    numOfQueries,
+  } = props;
+
+  useEffect(() => {
     console.log('Output.jsx: useEffect invoked');
-    if(editorToGrab) {
-    console.log('Output.jsx: in if');
+    if (editorToGrab) {
+      console.log('Output.jsx: in if');
       // Create a Codemirror headless that means in the bg, and not attached to the DOM
       let count = 1;
       let lastLine = 0;
-      for(let key in results){
+      for (let key in results) {
         const instance = new CodeMirror(document.getElementById('hidden'), {
-          value: JSON.stringify(results[key], null, 2)
+          value: JSON.stringify(results[key], null, 2),
         });
 
-        if(count === 1){
+        if (count === 1) {
           editorToGrab.foldCode(1);
         } else {
-          editorToGrab.foldCode(lastLine+1);
+          editorToGrab.foldCode(lastLine + 1);
         }
         count++;
         lastLine += instance.lineCount();
-        console.log(key + " lastline: " + lastLine);
+        console.log(key + ' lastline: ' + lastLine);
       }
     }
-    console.log('Output.jsx: end of useEffect')
+    console.log('Output.jsx: end of useEffect');
   }, [results]);
-
-// through state
-  // value, setValue
-
-// custom fn
-  // grabbing editor value
-  // resetting value with same value but collapsed
-
-// didMount
-  // grab editor
-  // 
-// didUpdate
-
-  // invoke a custom function
 
   return (
     <>
@@ -58,10 +50,11 @@ export default function Output(props) {
         }}
         on
         options={{
-          mode: language,
+          mode: 'javascript',
           foldGutter: true,
           gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
           readOnly: true,
+          lineNumbers: true,
           theme: theme,
           scrollbarStyle: null,
         }}

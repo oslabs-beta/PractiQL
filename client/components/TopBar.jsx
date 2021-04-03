@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function TopBar(props) {
-  const { input, selection, setResults, setQuerySubjects } = props;
+  const { endpoint, input, selection, setResults, setQuerySubjects } = props;
+
+  //  https://countries.trevorblades.com/
 
   const handleClick = () => {
     const sel = selection ? selection.trim() : input.trim();
@@ -10,78 +12,85 @@ export default function TopBar(props) {
     let querySubjects = [];
     let myQuery = 'query myquery {\r\n';
 
-    for (let i = 0; i < arrItems.length; i++){
-    
-     const x = arrItems[i];
-     
+    console.log(111, arrItems);
+    for (let i = 0; i < arrItems.length; i++) {
+      const x = arrItems[i];
       // IS THIS A MERGED QUERY?
       if (x.includes(',')) {
-
         const items = x.split(',');
 
         for (let i = 0; i < items.length; i++) {
           // DOES THIS item HAVE AN ALIAS?
           if (items[i].includes(':')) {
-            querySubjects.push(items[i].substring(0, items[i].indexOf(':')).trim());
+            querySubjects.push(
+              items[i].substring(0, items[i].indexOf(':')).trim()
+            );
 
             myQuery += items[i] + (i < items.length - 1 ? ',\r\n' : '\r\n');
           } else {
             // ADD ALIAS TO RETURN MULTIPLE RESULTSETS
-            const alias = items[i].substring(0, items[i].indexOf('{')).trim() + '_' + i.toString();
+            const alias =
+              items[i].substring(0, items[i].indexOf('{')).trim() +
+              '_' +
+              i.toString();
             querySubjects.push(alias);
 
-            myQuery += alias + ' : ' + items[i] + (i < items.length - 1 ? ',\r\n' : '\r\n');
+            myQuery +=
+              alias +
+              ' : ' +
+              items[i] +
+              (i < items.length - 1 ? ',\r\n' : '\r\n');
           }
         }
       } else {
         // DOES THIS item HAVE AN ALIAS?
-        if (x.includes(':')) {
+        if (!x.trimStart().startsWith('__') && x.includes(':')) {
           querySubjects.push(x.substring(0, x.indexOf(':')).trim());
         } else {
-
           let alias;
           const query = x.substring(0, x.indexOf('{')).trim();
           const repeat = querySubjects.includes(query);
           if (repeat) {
             // CREATE AN ALIAS
             alias = query + '_' + i.toString();
-          } 
+          }
 
           querySubjects.push(repeat ? alias : query);
-          myQuery += (repeat ? alias + ' : ' : '') + arrItems[i].trim() + (i < arrItems.length - 1 ? ',\r\n' : '\r\n');
+          myQuery +=
+            (repeat ? alias + ' : ' : '') +
+            arrItems[i].trim() +
+            (i < arrItems.length - 1 ? ',\r\n' : '\r\n');
         }
       }
     }
-  
-    myQuery += '}';
 
-    fetch('https://countries.trevorblades.com', {
+    myQuery += '}';
+    console.log('TopBar.jsx: fetching to ' + endpoint);
+    fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        query: myQuery
+        query: myQuery,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(222, myQuery);
+        console.log(333, data.data);
+        console.log(444, querySubjects);
+
+        if (data.errors) {
+          setResults(data.errors);
+          return;
+        }
+
+        // SET STATE - results
+        setResults(data.data);
+        setQuerySubjects(querySubjects);
       })
-    })
-    .then(res => res.json())
-    .then(data => {
-
-console.log(111, myQuery);      
-console.log(222, data.data);
-console.log(333, querySubjects);
-
-      if (data.errors) {
-        setResults(data.errors);
-        return;
-      }
-      
-      // SET STATE - results
-      setResults(data.data);
-      setQuerySubjects(querySubjects)
-
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   function matchRecursiveRegExp(str, left, right) {
@@ -106,12 +115,27 @@ console.log(333, querySubjects);
     return a;
   }
 
+  function handleBtnClick() {
+    // passes value of input to props.handleBtnClick
+    const inputValue = document.getElementById('endpoint-input').value;
+
+    props.handleBtnClick(inputValue);
+    document.getElementById('endpoint-input').value = '';
+  }
+
   return (
-    <div className="top-bar top-bar--nord">
+    <div id="top-bar" className="top-bar top-bar--nord">
       <span className="logo logo--nord">PractiQL</span>
       <button className="send-btn send-btn--nord" onClick={handleClick}>
         Send
       </button>
+      <input
+        style={{ width: '12rem' }}
+        id="endpoint-input"
+        type="input"
+        placeholder="Enter new GraphQL endpoint here"
+      ></input>
+      <button onClick={handleBtnClick}>Set endpoint</button>
     </div>
   );
 }
