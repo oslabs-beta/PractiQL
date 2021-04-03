@@ -3,6 +3,41 @@ GraphQL APIs:
 - https://api.spacex.land/graphql/ 
 
 
+Schema:
+{
+  "_queryType": "Query",
+  "_mutationType": null,
+  "_subscriptionType": null,
+  "_directives":["@cacheControl", "@skip","@include","@deprecated"],
+  "_typeMap": {
+    "Query":"Query",
+    "ContinentFilterInput": "ContinentFilterInput",
+    "StringQueryOperatorInput": "StringQueryOperatorInput",
+    "String": "String",
+    "Continent": "Continent", *
+    "ID": "ID", *
+    "Country": "Country", *
+    "Language": "Language", *
+    "Boolean": "Boolean",
+    "State": "State", * O
+    "CountryFilterInput": "CountryFilterInput",
+    "LanguageFilterInput": "LanguageFilterInput",
+    "__Schema": "__Schema",
+    "__Type": "__Type",
+    "__TypeKind": "__TypeKind",
+    "__Field": "__Field",
+    "__InputValue": "__InputValue",
+    "__EnumValue": "__EnumValue",
+    "__Directive": "__Directive",
+    "__DirectiveLocation": "__DirectiveLocation",
+    "CacheControlScope": "CacheControlScope",
+    "Upload": "Upload",
+    "Int": "Int"
+  },
+  "_subTypeMap": {},
+  "_implementationsMap": {}
+}
+
   const [accordion, setAccordion] = useState({
     accordionValue: 'collapsed',
     editorToGrab: null,

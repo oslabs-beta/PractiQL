@@ -8,7 +8,7 @@ export default function createTree(schema) {
   const mainFields = Object.values(schema._queryType._fields);
   // console.log(mainFields);
 
-  mainFields.forEach((field) => {
+  mainFields.forEach((field, index) => {
     const typeDef = {};
     const attributes = {};
     const children = [];
@@ -17,19 +17,28 @@ export default function createTree(schema) {
       attributes[field.args[i].name] = findType(field.args[i].type).name;
     }
 
+    const autoQuery =
+      !attributes.filter && Object.keys(attributes).length !== 0
+        ? field.name +
+          '(' +
+          Object.keys(attributes)[0] +
+          `:"INSERT_${attributes[Object.keys(attributes)[0]]}_HERE"` +
+          ')'
+        : field.name;
+
+    console.log('createTree.js: ' + autoQuery);
+
     const innerChildren = Object.values(findSubFields(field.type));
 
     for (let i = 0; i < innerChildren.length; i++) {
-      children.push(getChildren(innerChildren[i]));
+      children.push(getChildren(innerChildren[i], autoQuery));
     }
 
     typeDef.name = field.name;
+    typeDef.autoQuery = [autoQuery];
     typeDef.attributes = attributes;
     typeDef.children = children;
 
-    // console.log(typeDef.name, ' : ', innerChildren);
-
-    // cache[field.name] = typeDef
     myTree.children.push(typeDef);
   });
 
@@ -45,11 +54,7 @@ export default function createTree(schema) {
     return findSubFields(type.ofType);
   }
 
-  function getChildren(child) {
-    // if(cache[child.name]) {
-    //   console.log(cache);
-    //   return cache[child.name];
-    // }
+  function getChildren(child, parentName) {
     const typeDef = {};
     const attributes = {};
     const children = [];
@@ -58,23 +63,16 @@ export default function createTree(schema) {
       attributes[child.args[i].name] = findType(child.args[i].type).name;
     }
 
-    // console.log(attributes);
-
-    // const subFields = findSubFields(child.type);
-    // if (subFields) {
-    //   const innerChildren = Object.values(subFields);
-    //   for (let i = 0; i < innerChildren.length; i++) {
-    //     children.push(getChildren(innerChildren[i]));
-    //   }
-    // }
-
     const innerChild = findType(child.type);
     children.push({
       name: innerChild.name,
+      autoQuery: [parentName, child.name],
+      scalar: true,
       attributes: { description: innerChild.description },
     });
 
     typeDef.name = child.name;
+    typeDef.autoQuery = [parentName, child.name];
     typeDef.attributes = attributes;
     typeDef.children = children;
 
@@ -83,6 +81,6 @@ export default function createTree(schema) {
     // cache[child.name] = typeDef
     return typeDef;
   }
-  // console.log(myTree);
+  console.log(myTree);
   return myTree;
 }

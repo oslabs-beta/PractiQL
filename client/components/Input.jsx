@@ -4,6 +4,7 @@ import { ValidationContext, SDLValidationContext } from 'graphql';
 
 export default function Input(props) {
   const {
+    autoQuery,
     value,
     onChange,
     selection,
@@ -29,6 +30,7 @@ export default function Input(props) {
       editor.showHint({ completeSingle: false });
     }
   }
+
   return (
     <div className="input-container-outer">
       <ControlledEditor
