@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Treebeard } from 'react-treebeard';
-import autoQuery from '../../helpers/autoQuery.js';
+import autoQuery from '../../helpers/autoQuery';
 
 export default function TreeExample(props) {
   const { tree } = props;
@@ -11,8 +11,10 @@ export default function TreeExample(props) {
     if (cursor) {
       cursor.active = false;
     }
-    console.log(node);
+
+    // Checks if clicked node in tree diagram is a scalar value.
     if (node.scalar) {
+      // If true, generates query for input instance.
       props.handleAutoQuery(autoQuery(node.autoQueryChain));
     }
 

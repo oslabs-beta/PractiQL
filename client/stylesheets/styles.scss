@@ -1,4 +1,5 @@
 @import 'custom-colors';
+@import 'bottom-bar';
 @import 'body';
 @import 'CodeMirror-default-overwrites';
 @import 'top-bar';
@@ -11,6 +12,7 @@
 @import 'widget-btn';
 @import 'logo';
 @import 'tree';
+@import 'get-schema-btn';
 @import './custom-themes/custom-nord';
 
 body,

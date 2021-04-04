@@ -5,7 +5,6 @@ export default function createTree(schema) {
   };
 
   const mainFields = Object.values(schema._queryType._fields);
-  console.log(mainFields);
 
   mainFields.forEach((field) => {
     const typeDef = {};

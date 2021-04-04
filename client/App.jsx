@@ -42,7 +42,6 @@ export default function App(props) {
   const [schema, setSchema] = useState('');
   const [treeObj, setTreeObj] = useState({});
   const [stateEndpoint, setStateEndpoint] = useState(endpoint);
-  const [autoQuery, setAutoQuery] = useState('');
 
   // Sends introspection query to endpoint and sets results as schema
   useEffect(() => {
@@ -60,7 +59,6 @@ export default function App(props) {
       .then((res) => res.json())
       .then((schemaJSON) => {
         setSchema(buildClientSchema(schemaJSON.data));
-        // console.log(buildClientSchema(schemaJSON.data));
       });
   }, [stateEndpoint]);
 
@@ -86,7 +84,6 @@ export default function App(props) {
   // Sets new endpoints
   const handleBtnClick = (newEndpoint) => {
     // Sets new endpoint
-    console.log('App.jsx: btnClick detected');
     setStateEndpoint(newEndpoint);
     setQuerySubjects([]);
   };
@@ -109,15 +106,20 @@ export default function App(props) {
           />
         </div>
         <div className="io-container">
-          <Input
-            autoQuery={autoQuery}
-            theme={myTheme}
-            value={input}
-            onChange={setInput}
-            selection={selection}
-            onSelectionChange={setSelection}
-            schema={schema}
-          />
+          <div className="input-container-wrapper">
+            <Input
+              theme={myTheme}
+              value={input}
+              onChange={setInput}
+              selection={selection}
+              onSelectionChange={setSelection}
+              schema={schema}
+            />
+            <div className={'bottom-bar'}>
+              <span className="bottom-bar-schema">Schema</span>
+            </div>
+          </div>
+
           <div className="output-container-outer output-container-outer--nord">
             <Output
               language="javascript"
@@ -127,11 +129,11 @@ export default function App(props) {
             />
           </div>
 
-          <div className="outter-tree-wrap">
+          {/* <div className="outter-tree-wrap">
             <div className="inner-tree-wrap">
               <Tree handleAutoQuery={handleAutoQuery} tree={treeObj} />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

@@ -1,0 +1,14 @@
+.bottom-bar {
+  color: gray;
+  font-size: 0.95rem;
+  background-color: $nord-black;
+  padding: 0.75rem 0.75rem;
+}
+
+.bottom-bar-schema {
+  cursor: pointer;
+}
+
+.bottom-bar-schema:hover {
+  color: $nord-green;
+}
