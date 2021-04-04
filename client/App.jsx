@@ -1,19 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import {
-  getIntrospectionQuery,
-  buildClientSchema,
-  parse,
-  buildASTSchema,
-  buildSchema,
-  printSchema,
-} from 'graphql';
+import { getIntrospectionQuery, buildClientSchema } from 'graphql';
 import Output from './components/Output';
 import TopBar from './components/TopBar';
 import Input from './components/Input';
 import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/neo.css';
 import 'codemirror/theme/nord.css';
-import 'codemirror/theme/base16-light.css';
 import 'codemirror/addon/hint/show-hint.css';
 import 'codemirror/addon/hint/show-hint';
 import 'codemirror/addon/lint/lint';
@@ -34,21 +25,21 @@ import createTree from '../helpers/createTree.js';
 
 export default function App(props) {
   const { theme, endpoint } = props;
+  const [editor, setEditor] = useState('');
   const [input, setInput] = useState('');
-  const [selection, setSelection] = useState('');
   const [myTheme, setMyTheme] = useState(theme);
-  const [results, setResults] = useState(false);
   const [querySubjects, setQuerySubjects] = useState([]);
+  const [results, setResults] = useState(false);
   const [schema, setSchema] = useState('');
-  const [treeObj, setTreeObj] = useState({});
-  const [stateEndpoint, setStateEndpoint] = useState(endpoint);
+  const [selection, setSelection] = useState('');
   const [sideBarWidth, setSideBarWidth] = useState({
     width: '0rem',
   });
+  const [stateEndpoint, setStateEndpoint] = useState(endpoint);
+  const [treeObj, setTreeObj] = useState({});
 
   // Sends introspection query to endpoint and sets results as schema
   useEffect(() => {
-    console.log('App.jsx: useEffect invoked');
     fetch(stateEndpoint, {
       method: 'POST',
       headers: {
@@ -68,19 +59,7 @@ export default function App(props) {
   // Uses schema to build tree
   useEffect(() => {
     if (schema) {
-      // const validSchema = buildSchema(printSchema(schema));
-      // const allTypes = validSchema.getTypeMap();
-      // const allTypesAst = Object.keys(allTypes).map(key => allTypes[key].astNode);
-      // console.log(allTypesAst);
-      // console.log(schema._typeMap);
-      // console.log(createTree(schema));
-      console.log(JSON.stringify(schema));
-      console.log(schema);
       setTreeObj(createTree(schema));
-      console.log(treeObj);
-      for (let key in treeObj) {
-        console.log(key);
-      }
     }
   }, [schema]);
 
@@ -95,6 +74,7 @@ export default function App(props) {
     }
   };
 
+  // Generates autoQueries
   const handleAutoQuery = (query) => {
     setInput(query);
   };
@@ -112,11 +92,17 @@ export default function App(props) {
     setTreeObj('');
   };
 
+  // Sets new editor for keyboard shortcuts
+  const setNewEditor = (newEditor) => {
+    setEditor(newEditor);
+  };
+
   return (
     <div className="main-container">
       <div className="content-wrap">
         <div className="top-bar-wrap">
           <TopBar
+            editor={editor}
             handleBtnClick={handleBtnClick}
             endpoint={stateEndpoint}
             input={input}
@@ -128,6 +114,7 @@ export default function App(props) {
         <div className="io-container">
           <div className="input-container-wrapper">
             <Input
+              setNewEditor={setNewEditor}
               theme={myTheme}
               value={input}
               onChange={setInput}

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 
+//  https://countries.trevorblades.com/
 export default function TopBar(props) {
   const { endpoint, input, selection, setResults, setQuerySubjects } = props;
-
-  //  https://countries.trevorblades.com/
 
   const handleClick = () => {
     const sel = selection ? selection.trim() : input.trim();
@@ -121,6 +120,15 @@ export default function TopBar(props) {
 
     props.handleBtnClick(inputValue);
     document.getElementById('endpoint-input').value = '';
+  }
+
+  // Sets keyboard shortcut for sending queries
+  if (props.editor !== '') {
+    const editor = props.editor;
+    const keyMap = {
+      'Ctrl-Enter': handleClick,
+    };
+    editor.addKeyMap(keyMap);
   }
 
   return (
