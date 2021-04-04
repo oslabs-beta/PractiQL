@@ -1,0 +1,28 @@
+.send-btn {
+  cursor: pointer;
+  color: $nord-green;
+  padding: 0.3rem;
+  width: 5rem;
+  margin: 0.5rem;
+  border: 1px solid #202020;
+  border-radius: 3px;
+  font-size: 1.025rem;
+  background-color: rgba(0, 0, 0, 0.03);
+  transition: font-size 200ms, color 200ms, background-color 200ms;
+}
+
+.send-btn:hover {
+  color: lighten($nord-green, 10%);
+  background-color: lighten(rgba(212, 212, 212, 0.08), 45%);
+}
+
+.send-btn:active {
+  color: black;
+  background-color: darken(rgba(212, 212, 212, 0.06), 50%);
+  font-size: 1rem;
+  box-shadow: 0;
+}
+
+.send-btn:focus {
+  outline: none;
+}

@@ -14,17 +14,6 @@
   color: $nord-green;
 }
 
-.send-btn--nord,
-.set-endpoint--nord {
-  border: 1px solid rgb(45, 45, 45);
-  border-top-color: rgb(60, 60, 60);
-  border-left-color: rgb(55, 55, 55);
-  border-right-color: rgb(75, 75, 75);
-  border-bottom-color: rgb(75, 75, 75);
-  box-shadow: none;
-  color: $nord-green;
-}
-
 .output-container-outer--nord {
   border-left-color: $nord-black;
   background-color: $nord-primary;
