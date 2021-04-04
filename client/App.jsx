@@ -89,10 +89,11 @@ export default function App(props) {
   // Close sidebar
   const handleCloseSideBar = () => {
     setSideBarWidth({ width: '0rem' });
+    setTreeObj('');
+    // closes bottom bar
     const bottomBar = document.getElementById('bottom-bar');
     bottomBar.style.height = '0';
     bottomBar.style.padding = '1rem 0.75rem 0 0.75rem';
-    setTreeObj('');
   };
 
   // Sets new editor for keyboard shortcuts
@@ -100,7 +101,7 @@ export default function App(props) {
     setEditor(newEditor);
   };
 
-  // Expands bottom bar when mouse hovers over bottom-bar-toggle-icon
+  // Expands bottom bar when mouse enters
   const handleBottomBarExpand = () => {
     console.log('App.jsx: handleBottomBarExpand invoked');
     const bottomBar = document.getElementById('bottom-bar');
@@ -108,6 +109,7 @@ export default function App(props) {
     bottomBar.style.padding = '1rem 0.75rem 2rem 0.75rem';
   };
 
+  // Collapses bottom bar when mouse leaves and if side bar is not open
   const handleBottomBarCollapse = () => {
     // if sidebar is open, bottom bar stays expanded
     if (sideBarWidth.width !== '0rem') return;

@@ -25,6 +25,6 @@ export default function TreeExample(props) {
     setCursor(node);
     setData(Object.assign({}, data));
   };
-
-  return <Treebeard data={tree} onToggle={onToggle} />;
+  if (tree === '') return <></>;
+  else return <Treebeard data={tree} onToggle={onToggle} />;
 }
