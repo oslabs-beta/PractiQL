@@ -97,6 +97,20 @@ export default function App(props) {
     setEditor(newEditor);
   };
 
+  // Expands bottom bar when mouse hovers over bottom-bar-toggle-icon
+  const handleBottomBarExpand = () => {
+    console.log('App.jsx: handleBottomBarExpand invoked');
+    const bottomBar = document.getElementById('bottom-bar');
+    bottomBar.style.removeProperty = 'height';
+    bottomBar.style.padding = '1rem 0.75rem 2rem 0.75rem';
+  };
+
+  const handleBottomBarCollapse = () => {
+    const bottomBar = document.getElementById('bottom-bar');
+    bottomBar.style.height = '0';
+    bottomBar.style.padding = '1rem 0.75rem 0 0.75rem';
+  };
+
   return (
     <div className="main-container">
       <div className="content-wrap">
@@ -122,9 +136,26 @@ export default function App(props) {
               onSelectionChange={setSelection}
               schema={schema}
             />
-            <div className={'bottom-bar'}>
-              <span onClick={handleSchemaRequest} className="bottom-bar-schema">
+            <div
+              id={'bottom-bar'}
+              onMouseEnter={handleBottomBarExpand}
+              onMouseLeave={handleBottomBarCollapse}
+              className={'bottom-bar'}
+            >
+              <div className="bottom-bar-toggle-icon-wrapper">
+                <span className="bottom-bar-toggle-icon">🜉</span>
+              </div>
+              <span
+                onClick={handleSchemaRequest}
+                className="bottom-bar-options bottom-bar-schema"
+              >
                 Schema
+              </span>
+              <span className="bottom-bar-options bottom-bar-docs bottom-bar-unavailable">
+                Docs
+              </span>
+              <span className="bottom-bar-options bottom-bar-metrics bottom-bar-unavailable">
+                Metrics
               </span>
             </div>
           </div>

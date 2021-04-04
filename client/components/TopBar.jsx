@@ -167,7 +167,7 @@ export default function TopBar(props) {
           id="endpoint-input"
           className="endpoint-input"
           type="input"
-          placeholder="Enter new GraphQL endpoint here..."
+          placeholder="Enter new endpoints here..."
         ></input>
       </div>
     </div>
