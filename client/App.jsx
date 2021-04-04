@@ -42,6 +42,9 @@ export default function App(props) {
   const [schema, setSchema] = useState('');
   const [treeObj, setTreeObj] = useState({});
   const [stateEndpoint, setStateEndpoint] = useState(endpoint);
+  const [sideBarWidth, setSideBarWidth] = useState({
+    width: '0rem',
+  });
 
   // Sends introspection query to endpoint and sets results as schema
   useEffect(() => {
@@ -92,6 +95,12 @@ export default function App(props) {
     setInput(query);
   };
 
+  const handleSchemaRequest = () => {
+    console.log('App.jsx: handleSchemaRequest detected');
+    setSideBarWidth({ width: '18rem' });
+    setTreeObj(createTree(schema));
+  };
+
   return (
     <div className="main-container">
       <div className="content-wrap">
@@ -116,7 +125,9 @@ export default function App(props) {
               schema={schema}
             />
             <div className={'bottom-bar'}>
-              <span className="bottom-bar-schema">Schema</span>
+              <span onClick={handleSchemaRequest} className="bottom-bar-schema">
+                Schema
+              </span>
             </div>
           </div>
 
@@ -129,11 +140,11 @@ export default function App(props) {
             />
           </div>
 
-          {/* <div className="outter-tree-wrap">
+          <div style={sideBarWidth} className="outter-tree-wrap">
             <div className="inner-tree-wrap">
               <Tree handleAutoQuery={handleAutoQuery} tree={treeObj} />
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>
