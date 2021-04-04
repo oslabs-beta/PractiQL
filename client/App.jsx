@@ -89,6 +89,10 @@ export default function App(props) {
     // Sets new endpoint
     setStateEndpoint(newEndpoint);
     setQuerySubjects([]);
+    // if sidebar is open, closes sidebar and removes tree from state
+    if (sideBarWidth.width !== '0rem') {
+      handleCloseSideBar();
+    }
   };
 
   const handleAutoQuery = (query) => {
