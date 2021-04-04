@@ -101,7 +101,8 @@ export default function App(props) {
 
   // Constructs new tree diagram
   const handleSchemaRequest = () => {
-    setSideBarWidth({ width: '18rem' });
+    const widthToSet = sideBarWidth.width === '0rem' ? '18rem' : '0rem';
+    setSideBarWidth({ width: widthToSet });
     setTreeObj(createTree(schema));
   };
 
