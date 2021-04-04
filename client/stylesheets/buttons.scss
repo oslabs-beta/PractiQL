@@ -11,7 +11,8 @@
 //   transition: background-color 150ms;
 // }
 
-.send-btn {
+.send-btn,
+.set-endpoint {
   cursor: pointer;
   color: $text-black;
   padding: 0.5rem 0;
@@ -25,12 +26,18 @@
   transition: color 200ms, background-color 200ms;
 }
 
-.send-btn:hover {
+.set-endpoint {
+  font-size: 0.5rem;
+}
+
+.send-btn:hover,
+.set-endpoint:hover {
   color: steelblue;
   background-color: lighten(rgba(212, 212, 212, 0.08), 45%);
 }
 
-.send-btn:active {
+.send-btn:active,
+.set-endpoint:active {
   box-shadow: 0px 0px 0px 0px;
   color: black;
   background-color: darken(rgba(212, 212, 212, 0.06), 50%);

@@ -119,7 +119,7 @@ export default function TopBar(props) {
     const inputValue = document.getElementById('endpoint-input').value;
 
     props.handleBtnClick(inputValue);
-    document.getElementById('endpoint-input').value = '';
+    // flash icon colors after setting new endpoint
   }
 
   // Sets keyboard shortcut for sending queries
@@ -131,19 +131,31 @@ export default function TopBar(props) {
     editor.addKeyMap(keyMap);
   }
 
+  // Sets enter shortcut for endpoint input
+  function handleChange(e) {
+    if (e.charCode === 13) {
+      const inputValue = document.getElementById('endpoint-input').value;
+      props.handleBtnClick(inputValue);
+    }
+  }
   return (
     <div id="top-bar" className="top-bar top-bar--nord">
       <span className="logo logo--nord">PractiQL</span>
       <button className="send-btn send-btn--nord" onClick={handleClick}>
         Send
       </button>
-      <input
-        style={{ width: '12rem' }}
-        id="endpoint-input"
-        type="input"
-        placeholder="Enter new GraphQL endpoint here"
-      ></input>
-      <button onClick={handleBtnClick}>Set endpoint</button>
+      <div className="endpoint-input-wrapper">
+        <div onClick={handleBtnClick} className="endpoint-input-icon">
+          ↻
+        </div>
+        <input
+          onKeyPress={handleChange}
+          id="endpoint-input"
+          className="endpoint-input"
+          type="input"
+          placeholder="Enter new GraphQL endpoint here..."
+        ></input>
+      </div>
     </div>
   );
 }
