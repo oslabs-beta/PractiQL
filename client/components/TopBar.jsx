@@ -117,15 +117,17 @@ export default function TopBar(props) {
   function handleBtnClick() {
     // passes value of input to props.handleBtnClick
     const inputValue = document.getElementById('endpoint-input').value;
-
     props.handleBtnClick(inputValue);
+
     let count = 6;
     let toggle = false;
+    const color = inputValue ? '#a9d0c6' : 'red';
+
     const intervalID = setInterval(() => {
       const endpointIcon = document.getElementById('endpoint-input-icon');
       console.log('interval');
       console.log(count);
-      if (!toggle) endpointIcon.style.color = '#a9d0c6';
+      if (!toggle) endpointIcon.style.color = color;
       else endpointIcon.style.color = 'gray';
       toggle = !toggle;
       count--;
