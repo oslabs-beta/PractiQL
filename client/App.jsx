@@ -89,6 +89,9 @@ export default function App(props) {
   // Close sidebar
   const handleCloseSideBar = () => {
     setSideBarWidth({ width: '0rem' });
+    const bottomBar = document.getElementById('bottom-bar');
+    bottomBar.style.height = '0';
+    bottomBar.style.padding = '1rem 0.75rem 0 0.75rem';
     setTreeObj('');
   };
 
@@ -106,6 +109,8 @@ export default function App(props) {
   };
 
   const handleBottomBarCollapse = () => {
+    // if sidebar is open, bottom bar stays expanded
+    if (sideBarWidth.width !== '0rem') return;
     const bottomBar = document.getElementById('bottom-bar');
     bottomBar.style.height = '0';
     bottomBar.style.padding = '1rem 0.75rem 0 0.75rem';
