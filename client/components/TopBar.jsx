@@ -119,7 +119,18 @@ export default function TopBar(props) {
     const inputValue = document.getElementById('endpoint-input').value;
 
     props.handleBtnClick(inputValue);
-    // flash icon colors after setting new endpoint
+    let count = 6;
+    let toggle = false;
+    const intervalID = setInterval(() => {
+      const endpointIcon = document.getElementById('endpoint-input-icon');
+      console.log('interval');
+      console.log(count);
+      if (!toggle) endpointIcon.style.color = '#a9d0c6';
+      else endpointIcon.style.color = 'gray';
+      toggle = !toggle;
+      count--;
+      if (count === 0) clearInterval(intervalID);
+    }, 175);
   }
 
   // Sets keyboard shortcut for sending queries
@@ -133,10 +144,7 @@ export default function TopBar(props) {
 
   // Sets enter shortcut for endpoint input
   function handleChange(e) {
-    if (e.charCode === 13) {
-      const inputValue = document.getElementById('endpoint-input').value;
-      props.handleBtnClick(inputValue);
-    }
+    if (e.charCode === 13) handleBtnClick();
   }
   return (
     <div id="top-bar" className="top-bar top-bar--nord">
@@ -145,7 +153,11 @@ export default function TopBar(props) {
         Send
       </button>
       <div className="endpoint-input-wrapper">
-        <div onClick={handleBtnClick} className="endpoint-input-icon">
+        <div
+          onClick={handleBtnClick}
+          id="endpoint-input-icon"
+          className="endpoint-input-icon"
+        >
           ↻
         </div>
         <input
