@@ -34,6 +34,7 @@ export default function App(props) {
   const [selection, setSelection] = useState('');
   const [sideBarWidth, setSideBarWidth] = useState({
     width: '0rem',
+    padding: '0.5rem 0',
   });
   const [stateEndpoint, setStateEndpoint] = useState(endpoint);
   const [treeObj, setTreeObj] = useState({});
@@ -79,16 +80,18 @@ export default function App(props) {
     setInput(query);
   };
 
-  // Constructs new tree diagram
+  // Constructs new tree diagram and opens side bar
   const handleSchemaRequest = () => {
     const widthToSet = sideBarWidth.width === '0rem' ? '18rem' : '0rem';
-    setSideBarWidth({ width: widthToSet });
+    const paddingToSet =
+      sideBarWidth.padding === '0.5rem 0' ? '0.5rem' : '0.5rem 0';
+    setSideBarWidth({ width: widthToSet, padding: paddingToSet });
     setTreeObj(createTree(schema));
   };
 
   // Close sidebar
   const handleCloseSideBar = () => {
-    setSideBarWidth({ width: '0rem' });
+    setSideBarWidth({ width: '0rem', padding: '0.5rem 0' });
     setTreeObj('');
     // closes bottom bar
     const bottomBar = document.getElementById('bottom-bar');
@@ -182,6 +185,7 @@ export default function App(props) {
                 X
               </span>
             </div>
+            <div className="sidebar-schema">Schema</div>
             <div className="inner-tree-wrap">
               <Tree handleAutoQuery={handleAutoQuery} tree={treeObj} />
             </div>

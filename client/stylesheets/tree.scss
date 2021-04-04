@@ -1,7 +1,8 @@
 .outer-tree-wrap {
   height: 100%;
-  transition: width 350ms;
+  transition: width 350ms, padding 350ms;
   background-color: #21252b;
+  padding: 0.5rem;
 }
 
 .inner-tree-wrap {
@@ -13,6 +14,14 @@
 .close-tree-wrapper {
   background-color: #21252b;
   text-align: end;
+}
+
+.sidebar-schema {
+  font-size: 3rem;
+  color: lightgray;
+  text-align: start;
+  border-bottom: 1px solid gray;
+  margin-bottom: 0.5rem;
 }
 
 .close-tree-btn {
