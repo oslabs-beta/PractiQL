@@ -95,10 +95,16 @@ export default function App(props) {
     setInput(query);
   };
 
+  // Constructs new tree diagram
   const handleSchemaRequest = () => {
-    console.log('App.jsx: handleSchemaRequest detected');
     setSideBarWidth({ width: '18rem' });
     setTreeObj(createTree(schema));
+  };
+
+  // Close sidebar
+  const handleCloseSideBar = () => {
+    setSideBarWidth({ width: '0rem' });
+    setTreeObj('');
   };
 
   return (
@@ -140,7 +146,12 @@ export default function App(props) {
             />
           </div>
 
-          <div style={sideBarWidth} className="outter-tree-wrap">
+          <div style={sideBarWidth} className="outer-tree-wrap">
+            <div className="close-tree-wrapper">
+              <span onClick={handleCloseSideBar} className="close-tree-btn">
+                X
+              </span>
+            </div>
             <div className="inner-tree-wrap">
               <Tree handleAutoQuery={handleAutoQuery} tree={treeObj} />
             </div>
