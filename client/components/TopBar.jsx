@@ -44,8 +44,15 @@ export default function TopBar(props) {
         }
       } else {
         // DOES THIS item HAVE AN ALIAS?
-        if (!x.trimStart().startsWith('__') && x.includes(':')) {
-          querySubjects.push(x.substring(0, x.indexOf(':')).trim());
+        let test = x.substring(0, x.indexOf(':')).trim()
+        if (test.indexOf('(') > 0) {
+          if (x.trimStart().startsWith('__')) {
+            querySubjects.push(x.substring(0, x.indexOf('{')).trim());
+          } else {
+            querySubjects.push(x.substring(0, x.indexOf('(')).trim());
+          }
+          myQuery += arrItems[i].trim();
+        
         } else {
           let alias;
           const query = x.substring(0, x.indexOf('{')).trim();

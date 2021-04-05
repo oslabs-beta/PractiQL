@@ -70,16 +70,6 @@ query myquery {
   }
 }
 
-
-query myquery {
-continents_name : continents {
-    name
-  },
-continents_code : continents {
-    code
-  }
-}
-
 query {
   countries {
     name
@@ -107,6 +97,15 @@ continents {
 
 // ===============================================
 
+query myquery {
+continents_name : continents {
+    name
+  },
+continents_code : continents {
+    code
+  }
+}
+
 {
   __type(name: "continents") {
     name
@@ -119,6 +118,19 @@ continents {
     }
   } 
 }
+
+{
+ 	language(code:"en"){
+  	name
+	}
+}
+
+
+
+\(.*:.*\)
+
+
+
 */
 
   const outputs = [];
