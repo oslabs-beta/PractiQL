@@ -26,5 +26,11 @@ export default function TreeExample(props) {
     setData(Object.assign({}, data));
   };
   if (tree === '') return <></>;
+  if (tree.error)
+    return (
+      <>
+        <span className="error-message">{tree.error}</span>
+      </>
+    );
   else return <Treebeard data={tree} onToggle={onToggle} />;
 }

@@ -1,4 +1,7 @@
 function createTree(schema) {
+  return {
+    error: 'Sorry, something went wrong',
+  };
   const myTree = {
     name: schema._queryType.name,
     children: [],
