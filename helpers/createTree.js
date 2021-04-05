@@ -1,7 +1,21 @@
 function createTree(schema) {
-  return {
-    error: 'Sorry, something went wrong',
-  };
+  // createTree() takes a GraphQL schema object and creates a tree for a Treebeard component
+
+  // creates custom error object and error message
+  const errorObject = { error: 'Sorry, something went wrong' };
+  const createTreeError = new Error('Schema not valid object');
+
+  // Validates schema argument
+  if (
+    !schema._queryType ||
+    !schema._queryType.name ||
+    !(typeof schema._queryType.name !== 'String') ||
+    !schema._queryType._fields
+  ) {
+    console.log(createTreeError);
+    return errorObject;
+  }
+
   const myTree = {
     name: schema._queryType.name,
     children: [],

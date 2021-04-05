@@ -25,7 +25,7 @@ export default function TreeExample(props) {
     setCursor(node);
     setData(Object.assign({}, data));
   };
-  if (tree === '') return <></>;
+
   if (tree.error)
     return (
       <>
