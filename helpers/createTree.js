@@ -1,4 +1,4 @@
-export default function createTree(schema) {
+function createTree(schema) {
   const myTree = {
     name: schema._queryType.name,
     children: [],
@@ -66,3 +66,5 @@ export default function createTree(schema) {
   console.log(myTree);
   return myTree;
 }
+
+module.exports = createTree;
