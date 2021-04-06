@@ -1,8 +1,10 @@
 .outer-tree-wrap {
   height: 100%;
   transition: width 350ms, padding 350ms;
-  background-color: #21252b;
+  background-color: $treebeard-blue;
+  // background-color: $nord-black;
   padding: 0.5rem;
+  width: 18rem;
 }
 
 .inner-tree-wrap {
@@ -13,10 +15,12 @@
 
 .close-tree-wrapper {
   background-color: #21252b;
+  // background-color: $nord-black;
   text-align: end;
 }
 
-.sidebar-schema {
+.sidebar-schema,
+.sidebar-schema-description {
   font-size: 3rem;
   color: lightgray;
   text-align: start;
@@ -24,8 +28,15 @@
   margin-bottom: 0.5rem;
 }
 
+.sidebar-schema-description {
+  font-size: 0.9rem;
+  font-weight: lighter;
+  margin-bottom: 1rem;
+}
+
 .close-tree-btn {
   font-size: 0.95rem;
+  line-height: 1;
   color: #9da5ab;
   cursor: pointer;
   padding-right: 0.5rem;
@@ -39,4 +50,9 @@
   width: 100%;
   overflow: hidden;
   overflow-y: auto;
+}
+
+.css-f91fgu ul,
+.css-f91fgu li {
+  background-color: $treebeard-blue;
 }

@@ -15,8 +15,7 @@ export default function TreeExample(props) {
     // Checks if clicked node in tree diagram is a scalar value.
     if (node.scalar) {
       // If true, generates query for input instance.
-      // props.handleAutoQuery(autoQuery(node.autoQueryChain));
-      props.handleAutoQuery(autoQuery([]));
+      props.handleAutoQuery(autoQuery(node.autoQueryChain));
     }
 
     node.active = true;

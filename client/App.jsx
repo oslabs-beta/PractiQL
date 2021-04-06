@@ -92,7 +92,7 @@ export default function App(props) {
   // Close sidebar
   const handleCloseSideBar = () => {
     setSideBarWidth({ width: '0rem', padding: '0.5rem 0' });
-    setTreeObj('');
+    setTreeObj({});
     // closes bottom bar
     const bottomBar = document.getElementById('bottom-bar');
     bottomBar.style.height = '0';
@@ -106,7 +106,6 @@ export default function App(props) {
 
   // Expands bottom bar when mouse enters
   const handleBottomBarExpand = () => {
-    console.log('App.jsx: handleBottomBarExpand invoked');
     const bottomBar = document.getElementById('bottom-bar');
     bottomBar.style.removeProperty = 'height';
     bottomBar.style.padding = '1rem 0.75rem 2rem 0.75rem';
