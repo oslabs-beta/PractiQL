@@ -28,6 +28,7 @@ export default function App(props) {
   const [editor, setEditor] = useState('');
   const [input, setInput] = useState('');
   const [myTheme, setMyTheme] = useState(theme);
+  const [queryCache, setQueryCache] = useState('');
   const [querySubjects, setQuerySubjects] = useState([]);
   const [results, setResults] = useState(false);
   const [schema, setSchema] = useState('');
@@ -78,6 +79,24 @@ export default function App(props) {
   // Generates autoQueries
   const handleAutoQuery = (query) => {
     setInput(query);
+  };
+
+  const handleQueryCacheAdd = (id, query) => {
+    const newQueryToAdd = { [id]: query };
+    let newInput = input + query;
+    setInput(newInput);
+    setQueryCache({ ...queryCache, ...newQueryToAdd });
+  };
+
+  const handleQueryCacheRemove = (id) => {
+    const newCache = Object.assign({}, queryCache);
+    delete newCache[id];
+    let newInput = '';
+    for (let key in newCache) {
+      newInput += queryCache[key];
+    }
+    setInput(newInput);
+    setQueryCache(newCache);
   };
 
   // Constructs new tree diagram and opens side bar
@@ -186,7 +205,12 @@ export default function App(props) {
             </div>
             <div className="sidebar-schema">Schema</div>
             <div className="inner-tree-wrap">
-              <Tree handleAutoQuery={handleAutoQuery} tree={treeObj} />
+              <Tree
+                handleAutoQuery={handleAutoQuery}
+                handleQueryCacheAdd={handleQueryCacheAdd}
+                handleQueryCacheRemove={handleQueryCacheRemove}
+                tree={treeObj}
+              />
             </div>
           </div>
         </div>

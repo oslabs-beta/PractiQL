@@ -71,6 +71,8 @@ function createTree(schema) {
     children.push({
       name: innerChild.name,
       autoQueryChain: [parentName, child.name],
+      id: innerChild.name + parentName + child.name,
+      added: false,
       scalar: true,
       attributes: { description: innerChild.description },
     });

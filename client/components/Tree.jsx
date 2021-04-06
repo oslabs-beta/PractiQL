@@ -15,7 +15,18 @@ export default function TreeExample(props) {
     // Checks if clicked node in tree diagram is a scalar value.
     if (node.scalar) {
       // If true, generates query for input instance.
-      props.handleAutoQuery(autoQuery(node.autoQueryChain));
+      node.added = !node.added;
+      if (node.added) {
+        console.log('Tree.jsx: adding node');
+        const queryToAdd = autoQuery(node.autoQueryChain);
+        // add queryToAdd to cache under node.id
+        props.handleQueryCacheAdd(node.id, queryToAdd);
+        // props.handleAutoQuery(queryToAdd);
+        // props.handleAutoQuery(autoQuery(node.autoQueryChain));
+      } else {
+        console.log('Tree.jsx: removing node');
+        props.handleQueryCacheRemove(node.id);
+      }
     }
 
     node.active = true;
