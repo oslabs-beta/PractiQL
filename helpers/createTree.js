@@ -7,6 +7,7 @@ function createTree(schema) {
 
   // Validates schema argument
   if (
+    !(schema !== null && typeof schema === 'object') ||
     !schema._queryType ||
     !schema._queryType.name ||
     !(typeof schema._queryType.name !== 'String') ||
