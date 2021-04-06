@@ -21,6 +21,8 @@ export default function TreeExample(props) {
         const queryToAdd = autoQuery(node.autoQueryChain);
         // add queryToAdd to cache under node.id
         props.handleQueryCacheAdd(node.id, queryToAdd);
+        // props.handleAutoQuery(queryToAdd);
+        // props.handleAutoQuery(autoQuery(node.autoQueryChain));
       } else {
         console.log('Tree.jsx: removing node');
         props.handleQueryCacheRemove(node.id);

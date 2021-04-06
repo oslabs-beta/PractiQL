@@ -83,7 +83,7 @@ export default function App(props) {
 
   const handleQueryCacheAdd = (id, query) => {
     const newQueryToAdd = { [id]: query };
-    let newInput = input === '' ? query : input + '\n' + query;
+    let newInput = input + query;
     setInput(newInput);
     setQueryCache({ ...queryCache, ...newQueryToAdd });
   };
@@ -93,9 +93,9 @@ export default function App(props) {
     delete newCache[id];
     let newInput = '';
     for (let key in newCache) {
-      newInput += queryCache[key] + '\n';
+      newInput += queryCache[key];
     }
-    setInput(input + newInput);
+    setInput(newInput);
     setQueryCache(newCache);
   };
 
