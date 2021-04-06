@@ -1,5 +1,9 @@
-export default function autoQuery(autoQueryChain) {
+function autoQuery(autoQueryChain) {
   // Uses autoQueryChain array to generate a query for input instance. Returns a string.
+  if (!Array.isArray(autoQueryChain)) {
+    console.log(new Error('Must pass an array to autoQuery'));
+    return '';
+  }
   let spaceCount = 2;
   const query = autoQueryChain.reduce((acc, el, index) => {
     let spaces = ' '.repeat(spaceCount);
@@ -20,3 +24,5 @@ ${spaces}}`;
   }, '');
   return query;
 }
+
+module.exports = autoQuery;
