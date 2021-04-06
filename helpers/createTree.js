@@ -19,6 +19,7 @@ function createTree(schema) {
   const myTree = {
     name: schema._queryType.name,
     children: [],
+    toggled: true,
   };
 
   const mainFields = Object.values(schema._queryType._fields);

@@ -41,10 +41,13 @@ describe('createTree()...', () => {
 
   test('...returns tree object when schema object is passed.', () => {
     expect(
-      createTree({ _queryType: { name: 'Test Schema', _fields: {} } })
+      createTree({
+        _queryType: { name: 'Test Schema', _fields: {} },
+      })
     ).toStrictEqual({
       name: 'Test Schema',
       children: [],
+      toggled: true,
     });
   });
 });
