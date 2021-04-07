@@ -4,6 +4,7 @@ import { ValidationContext, SDLValidationContext } from 'graphql';
 
 export default function Input(props) {
   const {
+    autoQuery,
     value,
     onChange,
     selection,
@@ -29,6 +30,7 @@ export default function Input(props) {
       editor.showHint({ completeSingle: false });
     }
   }
+
   return (
     <div className="input-container-outer">
       <ControlledEditor
@@ -42,6 +44,14 @@ export default function Input(props) {
         editorDidMount={(editor) => {
           editor.display.wrapper.className =
             editor.display.wrapper.className + ' input-instance';
+          props.setNewEditor(editor);
+          // const mapKey = {
+          //   'Ctrl-Enter': props.handleShortCut,
+          // };
+          // const mapKey = {
+          //   'Ctrl-Enter': () => {},
+          // };
+          // editor.addKeyMap(mapKey);
         }}
         options={{
           foldGutter: true,
@@ -53,9 +63,9 @@ export default function Input(props) {
           tabSize: 2,
           //currently is not linting need to look into it, might need options
           mode: 'graphql',
-          lint: {
-            schema: schema,
-          },
+          // lint: {
+          //   schema: schema,
+          // },
           showHint: true,
           hintOptions: {
             schema: schema,

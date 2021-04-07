@@ -3,6 +3,41 @@ GraphQL APIs:
 - https://api.spacex.land/graphql/ 
 
 
+Schema:
+{
+  "_queryType": "Query",
+  "_mutationType": null,
+  "_subscriptionType": null,
+  "_directives":["@cacheControl", "@skip","@include","@deprecated"],
+  "_typeMap": {
+    "Query":"Query",
+    "ContinentFilterInput": "ContinentFilterInput",
+    "StringQueryOperatorInput": "StringQueryOperatorInput",
+    "String": "String",
+    "Continent": "Continent", *
+    "ID": "ID", *
+    "Country": "Country", *
+    "Language": "Language", *
+    "Boolean": "Boolean",
+    "State": "State", * O
+    "CountryFilterInput": "CountryFilterInput",
+    "LanguageFilterInput": "LanguageFilterInput",
+    "__Schema": "__Schema",
+    "__Type": "__Type",
+    "__TypeKind": "__TypeKind",
+    "__Field": "__Field",
+    "__InputValue": "__InputValue",
+    "__EnumValue": "__EnumValue",
+    "__Directive": "__Directive",
+    "__DirectiveLocation": "__DirectiveLocation",
+    "CacheControlScope": "CacheControlScope",
+    "Upload": "Upload",
+    "Int": "Int"
+  },
+  "_subTypeMap": {},
+  "_implementationsMap": {}
+}
+
   const [accordion, setAccordion] = useState({
     accordionValue: 'collapsed',
     editorToGrab: null,
@@ -55,3 +90,70 @@ GraphQL APIs:
           //   };
           // });
           // console.log('value');
+
+=================================
+
+package.json backup
+
+=================================
+
+{
+  "name": "practiql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "build": "NODE_ENV=production webpack",
+    "dev": "NODE_ENV=development webpack serve --open & nodemon server/server.js",
+    "start": "node server/server.js",
+    "test": "jest",
+    "windows": "concurrently \"cross-env NODE_ENV=development nodemon server/server.js\" \"NODE_ENV=development webpack serve --open\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oslabs-beta/PractiQL.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oslabs-beta/PractiQL/issues"
+  },
+  "homepage": "https://github.com/oslabs-beta/PractiQL#readme",
+  "dependencies": {
+    "codemirror": "^5.60.0",
+    "codemirror-graphql": "^1.0.0",
+    "cookie-parser": "^1.4.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "graphql": "^15.5.0",
+    "html-entities": "^2.1.0",
+    "pg": "^8.5.1",
+    "postgres": "^1.0.2",
+    "react": "^17.0.1",
+    "react-codemirror2": "^7.2.1",
+    "react-dom": "^17.0.1",
+    "react-redux": "^7.2.2",
+    "react-treebeard": "^3.2.4",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.8",
+    "@babel/preset-env": "^7.13.9",
+    "@babel/preset-react": "^7.12.13",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.0",
+    "jest": "^26.6.3",
+    "node-fetch": "^2.6.1",
+    "nodemon": "^2.0.7",
+    "redux-devtools-extension": "^2.13.8",
+    "sass": "^1.32.8",
+    "sass-loader": "^11.0.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.24.3",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
+  }
+}

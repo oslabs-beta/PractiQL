@@ -1,3 +1,17 @@
+.input-container-wrapper {
+  // border: 5px solid purple;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1 1 0%;
+}
+
 .input-container-outer {
   display: -webkit-box;
   display: -ms-flexbox;

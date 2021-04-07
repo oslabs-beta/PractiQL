@@ -17,7 +17,9 @@ export default function Output(props) {
   useEffect(() => {
     // Returns results folded
     // How: copies the results into a headless CodeMirror instance that attaches to #hidden. This headless instance is used to count lines and identify where to fold code
-    console.log('Output.jsx: useEffect invoked');
+    // If only one query was sent, don't collapse code. Return code expanded.
+    if (results && Object.keys(results).length === 1) return;
+
     if (editorToGrab) {
       console.log('Output.jsx: in if');
       let count = 1;
@@ -39,7 +41,6 @@ export default function Output(props) {
     }
     // Cleans CodeMirror instances from DOM
     document.getElementById('hidden').innerHTML = '';
-    console.log('Output.jsx: end of useEffect');
   }, [results]);
 
   return (

@@ -1,0 +1,55 @@
+.bottom-bar {
+  color: gray;
+  font-size: 0.95rem;
+  background-color: $nord-black;
+  height: 0;
+  padding: 1rem 0.75rem 0rem 0.75rem;
+  transition: padding 200ms;
+}
+
+.bottom-bar-options {
+  margin-left: 3rem;
+}
+
+.bottom-bar-options:first-of-type {
+  margin-left: -1.5rem;
+}
+
+.bottom-bar-schema {
+  cursor: pointer;
+}
+
+.bottom-bar-schema:hover {
+  color: $nord-green;
+}
+
+.bottom-bar-toggle-icon-wrapper {
+  display: inline-flex;
+  height: 1.4rem;
+  width: 1.3rem;
+  padding: 0rem 0.3rem 0rem 0.3rem;
+  color: gray;
+  position: relative;
+  // top should be negative bottom-bar padding and icon height, e.g. padding = .75rem, icon height = 1rem, then icon top should be -1.75rem
+  top: -2.15rem;
+  background-color: $nord-black;
+  z-index: 4;
+  justify-content: center;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  cursor: pointer;
+}
+
+.bottom-bar-toggle-icon {
+  // icon is flipped upside down, so style accordingly
+  transform: rotate(180deg);
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  padding-bottom: 0.5rem;
+  color: $nord-green;
+}
+
+.bottom-bar-unavailable {
+  color: rgb(48, 48, 48);
+}
