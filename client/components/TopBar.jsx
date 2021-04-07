@@ -5,6 +5,10 @@ export default function TopBar(props) {
   const { endpoint, input, selection, setResults, setQuerySubjects } = props;
 
   const handleClick = () => {
+
+    //LocalStorage
+    localStorage.setItem('PractiQL', input.trim());
+
     const sel = selection ? selection.trim() : input.trim();
     const arrItems = matchRecursiveRegExp(sel, '{', '}');
 
