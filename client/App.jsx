@@ -188,12 +188,7 @@ export default function App(props) {
             </div>
             <div className="sidebar-schema">Schema</div>
             <div className="inner-tree-wrap">
-              <Tree
-                handleAutoQuery={handleAutoQuery}
-                // handleQueryCacheAdd={handleQueryCacheAdd}
-                // handleQueryCacheRemove={handleQueryCacheRemove}
-                tree={treeObj}
-              />
+              <Tree handleAutoQuery={handleAutoQuery} tree={treeObj} />
             </div>
           </div>
         </div>
