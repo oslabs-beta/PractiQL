@@ -1,6 +1,8 @@
 @import 'custom-colors';
+@import 'bottom-bar';
 @import 'body';
 @import 'CodeMirror-default-overwrites';
+@import 'endpoint-input';
 @import 'top-bar';
 @import 'main-container';
 @import 'io-container';
@@ -10,8 +12,10 @@
 @import 'send-btn';
 @import 'widget-btn';
 @import 'logo';
-@import 'tree';
+@import 'get-schema-btn';
+@import 'error-message';
 @import './custom-themes/custom-nord';
+@import 'tree';
 
 body,
 html {

@@ -1,0 +1,34 @@
+.endpoint-input-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 1px solid #202020;
+  border-radius: 3px;
+}
+
+.endpoint-input {
+  color: gray;
+  background-color: #2e3440;
+  font-size: 1.025rem;
+  width: 100%;
+  outline: none;
+  padding: 0.3rem;
+  border: 0;
+  border-left: 1px solid #202020;
+  border-radius: 3px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  height: 100%;
+}
+
+.endpoint-input-icon {
+  color: gray;
+  font-size: 1.1rem;
+  padding: 0 0.5rem;
+  cursor: pointer;
+  transition: color 200ms;
+}
+
+.endpoint-input-icon:hover {
+  color: $nord-green;
+}

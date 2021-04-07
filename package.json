@@ -4,11 +4,16 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "node server/server.js",
     "build": "NODE_ENV=production webpack",
     "dev": "NODE_ENV=development webpack serve --open & nodemon server/server.js",
+<<<<<<< HEAD
     "windows": "concurrently \"cross-env NODE_ENV=development nodemon server/server.js\" \"NODE_ENV=development webpack serve --open\"",
     "test": "jest"
+=======
+    "start": "node server/server.js",
+    "test": "jest",
+    "windows": "concurrently \"cross-env NODE_ENV=development nodemon server/server.js\" \"NODE_ENV=development webpack serve --open\""
+>>>>>>> f747e89f799f7267d09d54216eafb9ca7c71273a
   },
   "repository": {
     "type": "git",
