@@ -31,7 +31,7 @@ import 'codemirror/addon/scroll/simplescrollbars';
 import 'codemirror-graphql/results/mode';
 import Tree from './components/Tree.jsx';
 import createTree from '../helpers/createTree.js';
-
+const schemaTest = require('./introspectionSchema.json')
 export default function App(props) {
   const { theme, endpoint } = props;
   const [input, setInput] = useState('');
@@ -145,6 +145,7 @@ continents {
 
   useEffect(() => {
     console.log('App.jsx: useEffect invoked');
+    console.log(buildClientSchema(schemaTest))
     fetch(stateEndpoint, {
       method: 'POST',
       headers: {
