@@ -22,7 +22,6 @@ import 'codemirror/addon/scroll/simplescrollbars';
 import 'codemirror-graphql/results/mode';
 import Tree from './components/Tree.jsx';
 import createTree from '../helpers/createTree.js';
-const schemaTest = require('./introspectionSchema.json')
 export default function App(props) {
   const { theme, endpoint } = props;
   const [editor, setEditor] = useState('');
@@ -41,11 +40,6 @@ export default function App(props) {
 
   // Sends introspection query to endpoint and sets results as schema
   useEffect(() => {
-<<<<<<< HEAD
-    console.log('App.jsx: useEffect invoked');
-    console.log(buildClientSchema(schemaTest))
-=======
->>>>>>> f747e89f799f7267d09d54216eafb9ca7c71273a
     fetch(stateEndpoint, {
       method: 'POST',
       headers: {
