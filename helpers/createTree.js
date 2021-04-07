@@ -1,12 +1,29 @@
-export default function createTree(schema) {
-  // const cache = {};
+function createTree(schema) {
+  // createTree() takes a GraphQL schema object and creates a tree for a Treebeard component
+
+  // creates custom error object and error message
+  const errorObject = { error: 'Sorry, something went wrong' };
+  const createTreeError = new Error('Schema not valid object');
+
+  // Validates schema argument
+  if (
+    !(schema !== null && typeof schema === 'object') ||
+    !schema._queryType ||
+    !schema._queryType.name ||
+    !(typeof schema._queryType.name !== 'String') ||
+    !schema._queryType._fields
+  ) {
+    console.log(createTreeError);
+    return errorObject;
+  }
+
   const myTree = {
     name: schema._queryType.name,
     children: [],
+    toggled: true,
   };
 
   const mainFields = Object.values(schema._queryType._fields);
-  // console.log(mainFields);
 
   mainFields.forEach((field) => {
     const typeDef = {};
@@ -20,23 +37,19 @@ export default function createTree(schema) {
     const innerChildren = Object.values(findSubFields(field.type));
 
     for (let i = 0; i < innerChildren.length; i++) {
-      children.push(getChildren(innerChildren[i]));
+      children.push(getChildren(innerChildren[i], field.name));
     }
 
     typeDef.name = field.name;
+    typeDef.autoQueryChain = [field.name];
     typeDef.attributes = attributes;
     typeDef.children = children;
 
-    // console.log(typeDef.name, ' : ', innerChildren);
-
-    // cache[field.name] = typeDef
     myTree.children.push(typeDef);
   });
 
-  // console.log('TREE: ', myTree)
   function findType(type) {
     if (type.name) return { name: type.name, description: type.description };
-    // console.log(type.ofType);
     return findType(type.ofType);
   }
 
@@ -45,11 +58,7 @@ export default function createTree(schema) {
     return findSubFields(type.ofType);
   }
 
-  function getChildren(child) {
-    // if(cache[child.name]) {
-    //   console.log(cache);
-    //   return cache[child.name];
-    // }
+  function getChildren(child, parentName) {
     const typeDef = {};
     const attributes = {};
     const children = [];
@@ -58,31 +67,23 @@ export default function createTree(schema) {
       attributes[child.args[i].name] = findType(child.args[i].type).name;
     }
 
-    // console.log(attributes);
-
-    // const subFields = findSubFields(child.type);
-    // if (subFields) {
-    //   const innerChildren = Object.values(subFields);
-    //   for (let i = 0; i < innerChildren.length; i++) {
-    //     children.push(getChildren(innerChildren[i]));
-    //   }
-    // }
-
     const innerChild = findType(child.type);
     children.push({
       name: innerChild.name,
+      autoQueryChain: [parentName, child.name],
+      scalar: true,
       attributes: { description: innerChild.description },
     });
 
     typeDef.name = child.name;
+    typeDef.autoQueryChain = [parentName, child.name];
     typeDef.attributes = attributes;
     typeDef.children = children;
 
-    // console.log(typeDef.name, ' : ', innerChildren);
-
-    // cache[child.name] = typeDef
     return typeDef;
   }
-  // console.log(myTree);
+  console.log(myTree);
   return myTree;
 }
+
+module.exports = createTree;

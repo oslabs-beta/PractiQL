@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 
+//  https://countries.trevorblades.com/
 export default function TopBar(props) {
   const { endpoint, input, selection, setResults, setQuerySubjects } = props;
-
-  //  https://countries.trevorblades.com/
 
   const handleClick = () => {
     const sel = selection ? selection.trim() : input.trim();
@@ -125,24 +124,59 @@ export default function TopBar(props) {
   function handleBtnClick() {
     // passes value of input to props.handleBtnClick
     const inputValue = document.getElementById('endpoint-input').value;
-
     props.handleBtnClick(inputValue);
-    document.getElementById('endpoint-input').value = '';
+
+    let count = 6;
+    let toggle = false;
+    const color = inputValue ? '#a9d0c6' : 'red';
+
+    const intervalID = setInterval(() => {
+      const endpointIcon = document.getElementById('endpoint-input-icon');
+      console.log('interval');
+      console.log(count);
+      if (!toggle) endpointIcon.style.color = color;
+      else endpointIcon.style.color = 'gray';
+      toggle = !toggle;
+      count--;
+      if (count === 0) clearInterval(intervalID);
+    }, 175);
   }
 
+  // Sets keyboard shortcut for sending queries
+  if (props.editor !== '') {
+    const editor = props.editor;
+    const keyMap = {
+      'Ctrl-Enter': handleClick,
+    };
+    editor.addKeyMap(keyMap);
+  }
+
+  // Sets enter shortcut for endpoint input
+  function handleChange(e) {
+    if (e.charCode === 13) handleBtnClick();
+  }
   return (
     <div id="top-bar" className="top-bar top-bar--nord">
       <span className="logo logo--nord">PractiQL</span>
       <button className="send-btn send-btn--nord" onClick={handleClick}>
         Send
       </button>
-      <input
-        style={{ width: '12rem' }}
-        id="endpoint-input"
-        type="input"
-        placeholder="Enter new GraphQL endpoint here"
-      ></input>
-      <button onClick={handleBtnClick}>Set endpoint</button>
+      <div className="endpoint-input-wrapper">
+        <div
+          onClick={handleBtnClick}
+          id="endpoint-input-icon"
+          className="endpoint-input-icon"
+        >
+          ↻
+        </div>
+        <input
+          onKeyPress={handleChange}
+          id="endpoint-input"
+          className="endpoint-input"
+          type="input"
+          placeholder="Enter new endpoints here..."
+        ></input>
+      </div>
     </div>
   );
 }
