@@ -157,3 +157,12 @@ package.json backup
     "webpack-dev-server": "^3.11.2"
   }
 }
+
+// describe('controlled editor', () => {
+//   it('insert first test description', () => {
+//     const wrapper = shallow(<ControlledEditor value={'test'} />);
+//     const text = wrapper.find('textarea').text();
+//     expect(text).toEqual('test');
+//   });
+// });
+
