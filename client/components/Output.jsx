@@ -16,8 +16,8 @@ export default function Output(props) {
 
   useEffect(() => {
     // Returns results folded
-    // How: copies the results into a headless CodeMirror instance that attaches to #hidden. This headless instance is used to count lines and identify where to fold code
-    // If only one query was sent, don't collapse code. Return code expanded.
+    // How: copies the results into a headless CodeMirror instance. This headless instance is used to count lines and identify where to fold code
+    // If only one query was sent, won't collapse code. Returns code expanded.
     if (results && Object.keys(results).length === 1) return;
 
     if (editorToGrab) {
@@ -25,7 +25,7 @@ export default function Output(props) {
       let count = 1;
       let lastLine = 0;
       for (let key in results) {
-        const instance = new CodeMirror(document.getElementById('hidden'), {
+        let instance = new CodeMirror(document.createElement('div'), {
           value: JSON.stringify(results[key], null, 2),
         });
 
@@ -39,8 +39,6 @@ export default function Output(props) {
         console.log(key + ' lastline: ' + lastLine);
       }
     }
-    // Cleans CodeMirror instances from DOM
-    document.getElementById('hidden').innerHTML = '';
   }, [results]);
 
   return (
