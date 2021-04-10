@@ -15,7 +15,7 @@ export default function TopBar(props) {
     const isQuery = sel.includes('query');
     
     // DISALLOW mutation and query AT THE SAME TIME
-    if (isMutation && isQuery) return;
+    if (isMutation && isQuery) setResults({ msg: 'You cannot perform mutation and query at the same time' });;
     
     let myQuery;
     if (isQuery){
