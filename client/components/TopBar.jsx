@@ -10,10 +10,23 @@ export default function TopBar(props) {
     localStorage.setItem('PractiQL', input.trim());
 
     const sel = selection ? selection.trim() : input.trim();
+  
+    const isMutation = sel.includes('mutation');
+    const isQuery = sel.includes('query');
+    
+    // DISALLOW mutation and query AT THE SAME TIME
+    if (isMutation && isQuery) return;
+    
+    let myQuery;
+    if (isQuery){
+      myQuery = 'query myquery {\r\n';
+    } else if (isMutation) {
+      myQuery = 'mutation {\r\n';
+    }
+
     const arrItems = matchRecursiveRegExp(sel, '{', '}');
 
     let querySubjects = [];
-    let myQuery = 'query myquery {\r\n';
 
     console.log(111, arrItems);
     for (let i = 0; i < arrItems.length; i++) {
