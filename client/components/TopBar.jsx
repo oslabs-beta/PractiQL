@@ -12,18 +12,14 @@ export default function TopBar(props) {
     const sel = selection ? selection.trim() : input.trim();
   
     const isMutation = sel.includes('mutation');
-    const isQuery = sel.includes('query');
-    
-    // DISALLOW mutation and query AT THE SAME TIME
-    if (isMutation && isQuery) setResults({ msg: 'You cannot perform mutation and query at the same time' });;
     
     let myQuery;
-    if (isQuery){
-      myQuery = 'query myquery {\r\n';
-    } else if (isMutation) {
+    if (isMutation) {
       myQuery = 'mutation {\r\n';
+    } else {
+      myQuery = 'query myquery {\r\n';
     }
-
+    
     const arrItems = matchRecursiveRegExp(sel, '{', '}');
 
     let querySubjects = [];
