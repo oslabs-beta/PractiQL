@@ -1,0 +1,5 @@
+// jest.config.js
+module.exports = {
+  setupFiles: ['<rootDir>/__tests__/__config__/jest.setup.js'],
+  testPathIgnorePatterns: ['node_modules', '<rootDir>/__tests__/__config__/'],
+};

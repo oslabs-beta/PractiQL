@@ -8,7 +8,17 @@
     "dev": "NODE_ENV=development webpack serve --open & nodemon server/server.js",
     "start": "node server/server.js",
     "test": "jest",
+    "test-vs": "jest --verbose --silent",
     "windows": "concurrently \"cross-env NODE_ENV=development nodemon server/server.js\" \"NODE_ENV=development webpack serve --open\""
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/__tests__/__config__/jest.setup.js"
+    ],
+    "testPathIgnorePatterns": [
+      "node_modules",
+      "<rootDir>/__tests__/__config__/"
+    ]
   },
   "repository": {
     "type": "git",
