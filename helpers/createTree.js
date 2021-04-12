@@ -17,17 +17,22 @@ function createTree(schema) {
     return errorObject;
   }
 
-  const myTree = {
-    name: 'Schema', 
-    children: [{ name: schema._queryType.name, children: [], type: schema._queryType }],
-    toggled: true,
-  };
+  if(!schema) return {name: 'no schema found'};
+
+  const myTree = [
+    {
+      name: schema._queryType.name, 
+      children: [],
+      type: schema._queryType
+    }
+  ];
+
 
   if(schema._mutationType) {
-    myTree.children.push({name: schema._mutationType.name, children: [], type: schema._mutationType});
+    myTree.push({name: schema._mutationType.name, children: [], type: schema._mutationType});
   }
 
-  myTree.children.forEach(child => {
+  myTree.forEach(child => {
     createTopLevel(child);
   })
 
