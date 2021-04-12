@@ -20,9 +20,7 @@ export default function Input(props) {
   function handleSelection(sel) {
     if (onSelectionChange) {
       onSelectionChange(sel);
-      console.log(selection);
     }
-    // console.log(onSelectionChange);
   }
 
   function handlePress(editor, keyEvent) {
