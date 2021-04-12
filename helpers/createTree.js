@@ -18,35 +18,45 @@ function createTree(schema) {
   }
 
   const myTree = {
-    name: schema._queryType.name,
-    children: [],
+    name: 'Schema', 
+    children: [{ name: schema._queryType.name, children: [], type: schema._queryType }],
     toggled: true,
   };
 
-  const mainFields = Object.values(schema._queryType._fields);
+  if(schema._mutationType) {
+    myTree.children.push({name: schema._mutationType.name, children: [], type: schema._mutationType});
+  }
 
-  mainFields.forEach((field) => {
-    const typeDef = {};
-    const attributes = {};
-    const children = [];
+  myTree.children.forEach(child => {
+    createTopLevel(child);
+  })
 
-    for (let i = 0; i < field.args.length; i++) {
-      attributes[field.args[i].name] = findType(field.args[i].type).name;
-    }
 
-    const innerChildren = Object.values(findSubFields(field.type));
+  function createTopLevel(topChild) {
+    mainFields = Object.values(topChild.type._fields);
+    mainFields.forEach((field) => {
+      const typeDef = {};
+      const attributes = {};
+      const children = [];
 
-    for (let i = 0; i < innerChildren.length; i++) {
-      children.push(getChildren(innerChildren[i], field.name));
-    }
+      for (let i = 0; i < field.args.length; i++) {
+        attributes[field.args[i].name] = findType(field.args[i].type).name;
+      }
 
-    typeDef.name = field.name;
-    typeDef.autoQueryChain = [field.name];
-    typeDef.attributes = attributes;
-    typeDef.children = children;
+      const innerChildren = Object.values(findSubFields(field.type));
 
-    myTree.children.push(typeDef);
-  });
+      for (let i = 0; i < innerChildren.length; i++) {
+        children.push(getChildren(innerChildren[i], field.name));
+      }
+
+      typeDef.name = field.name;
+      typeDef.autoQueryChain = [field.name];
+      typeDef.attributes = attributes;
+      typeDef.children = children;
+
+      topChild.children.push(typeDef);
+    });
+  }
 
   function findType(type) {
     if (type.name) return { name: type.name, description: type.description };
