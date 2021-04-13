@@ -55,9 +55,7 @@ export default function App(props) {
     })
       .then((res) => res.json())
       .then((schemaJSON) => {
-        console.log(schemaJSON);
         setSchema(buildClientSchema(schemaJSON.data));
-        console.log(buildClientSchema(schemaJSON.data));
       });
   }, [stateEndpoint]);
 

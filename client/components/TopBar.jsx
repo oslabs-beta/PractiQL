@@ -9,21 +9,20 @@ export default function TopBar(props) {
     localStorage.setItem('PractiQL', input.trim());
 
     const sel = selection ? selection.trim() : input.trim();
-
+  
     const isMutation = sel.includes('mutation');
-
+    
     let myQuery;
     if (isMutation) {
       myQuery = 'mutation {\r\n';
     } else {
       myQuery = 'query myquery {\r\n';
     }
-
     const arrItems = matchRecursiveRegExp(sel, '{', '}');
 
     let querySubjects = [];
 
-    console.log(111, arrItems);
+    
     for (let i = 0; i < arrItems.length; i++) {
       const x = arrItems[i];
       // IS THIS A MERGED QUERY?
@@ -82,7 +81,7 @@ export default function TopBar(props) {
     }
 
     myQuery += '}';
-    console.log('TopBar.jsx: fetching to ' + endpoint);
+    
     fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -92,10 +91,6 @@ export default function TopBar(props) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(222, myQuery);
-        console.log(333, data.data);
-        console.log(444, querySubjects);
-
         if (data.errors) {
           setResults(data.errors);
           return;
@@ -143,8 +138,6 @@ export default function TopBar(props) {
 
     const intervalID = setInterval(() => {
       const endpointIcon = document.getElementById('endpoint-input-icon');
-      console.log('interval');
-      console.log(count);
       if (!toggle) endpointIcon.style.color = color;
       else endpointIcon.style.color = 'gray';
       toggle = !toggle;

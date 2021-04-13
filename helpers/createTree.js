@@ -97,7 +97,6 @@ function createTree(schema) {
 
     return typeDef;
   }
-  console.log(myTree);
   return myTree;
 }
 
