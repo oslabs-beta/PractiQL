@@ -86,7 +86,7 @@ export default function App(props) {
 
   // Constructs new tree diagram and opens side bar
   const handleSchemaRequest = () => {
-    const widthToSet = sideBarWidth.width === '0rem' ? '18rem' : '0rem';
+    const widthToSet = sideBarWidth.width === '0rem' ? '20rem' : '0rem';
     const paddingToSet =
       sideBarWidth.padding === '0.5rem 0' ? '0.5rem' : '0.5rem 0';
     setSideBarWidth({ width: widthToSet, padding: paddingToSet });

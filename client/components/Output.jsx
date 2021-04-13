@@ -21,7 +21,6 @@ export default function Output(props) {
     if (results && Object.keys(results).length === 1) return;
 
     if (editorToGrab) {
-      console.log('Output.jsx: in if');
       let count = 1;
       let lastLine = 0;
       for (let key in results) {
@@ -36,7 +35,6 @@ export default function Output(props) {
         }
         count++;
         lastLine += instance.lineCount();
-        console.log(key + ' lastline: ' + lastLine);
       }
     }
   }, [results]);
