@@ -20,9 +20,7 @@ export default function Input(props) {
   function handleSelection(sel) {
     if (onSelectionChange) {
       onSelectionChange(sel);
-      console.log(selection);
     }
-    // console.log(onSelectionChange);
   }
 
   function handlePress(editor, keyEvent) {
@@ -45,13 +43,6 @@ export default function Input(props) {
           editor.display.wrapper.className =
             editor.display.wrapper.className + ' input-instance';
           props.setNewEditor(editor);
-          // const mapKey = {
-          //   'Ctrl-Enter': props.handleShortCut,
-          // };
-          // const mapKey = {
-          //   'Ctrl-Enter': () => {},
-          // };
-          // editor.addKeyMap(mapKey);
         }}
         options={{
           foldGutter: true,

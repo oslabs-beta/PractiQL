@@ -1,3 +1,5 @@
+import Input from '../../client/components/Input';
+
 const autoQuery = require('../../helpers/autoQuery');
 
 test('autoQuery() returns error if array is not passed.', () => {
