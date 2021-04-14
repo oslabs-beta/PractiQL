@@ -1,4 +1,4 @@
-![PractiQL-Logo-Lite (1)](https://user-images.githubusercontent.com/78000339/114763147-7a40f300-9d30-11eb-9cfc-bbdc6cf7d532.png)
+<img src="./images/PractiQL-logodark.png">
 
 #
 <p align="center">
@@ -15,7 +15,30 @@ Users can test queries to GraphQL APIs in a flexible manner as shown below.
 
 <hr>
 
-# ![logo - lite](https://user-images.githubusercontent.com/78000339/114765256-f0def000-9d32-11eb-8f0c-66714330e8e1.png) **Features**
+# <image width=30 align="center" src="./images/Logo-Dark.png"> **Features**
+  <hr>
+  
+  <image width=500 src="./images/PractiQL-mq.gif">
+  
+  <image width=500 src="./images/PractiQL-schemaTree.gif">
+  
+  
+  
+  
+  
+  
+  
+  # <image width=30 align="center" src="./images/Logo-Dark.png"> **Contributors**
+  <hr>
+  
+[Anthony C.](https://www.google.com/) [@anthonycruz1](https://github.com/anthonycruz1)
+
+[Les C.](linkedin.com/in/leschae) [@lesc999](https://github.com/lesc999)
+
+[Rob Caporino](https://www.google.com/) [@rcaporino](https://github.com/rcaporino)
+
+[David Nadler](https://www.linkedin.com/in/davenads/) [@davenads](https://github.com/Davenads)
+  
 
 
 
