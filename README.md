@@ -17,12 +17,17 @@
 <br />
 PractiQL provides users with the ability to create and send out multiple queries at once without the need for GraphQL aliases. Results are returned in separate code blocks, including results for queries to the same field, for an intuitive and expedited experience with little mental overhead. 
 Send a bunch of queries. Get a bunch of responses. It just works.
+<br />
+<image width=500 src="./images/PractiQL-mq2.gif">
+<br />
+
 
 <b>Write a Bunch of Queries. Send the Ones You Want</b>
 <br />
 Users also have the option to send out different combinations of multiple queries. It’s as easy as highlighting the queries you want to send and sending them.
 <br />
-<image width=500 src="./images/PractiQL-mq.gif">
+<image width=500 src="./images/PractiQL-mq2.gif">
+<br />
   
   
   
@@ -34,8 +39,9 @@ PractiQL can render a tree list model of a target GraphQL API for an easy-to-nav
 <br />
 Users also have the ability to generate queries by clicking on the nodes of the schema tree instead of typing those queries out manually. The result is an extremely intuitive experience and improved developer workflow that’s especially useful when testing new GraphQL APIs. 
 No more guessing. No more relying on auto-completed fields. Generate queries as you’re browsing the schema.
+<br />
 <image width=500 src="./images/PractiQL-schemaTree.gif">
-  
+<br /> 
   
 <b>Saved Queries</b>
 <br />
