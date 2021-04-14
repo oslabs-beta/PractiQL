@@ -27,9 +27,15 @@
     <li>
       <b>Schema Tree:</b> Took user schema and rendered visual representation, allowing users to click different nodes to automatically generate GraphQL queries within input.
     </li>
- <li>
+ <ul>
   
   <image width=500 src="./images/PractiQL-schemaTree.gif">
+  
+  
+  
+  
+  
+    
   
   
   
