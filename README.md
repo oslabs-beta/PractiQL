@@ -29,6 +29,7 @@ Users also have the option to send out different combinations of multiple querie
 <b>Schema Trees</b>
 <br />
 PractiQL can render a tree list model of a target GraphQL API for an easy-to-navigate representation of the schema. We call the models schema trees, and they’re a quick and organized way to view and interact with entire GraphQL schemas at once.
+<br />
 <b>Automatically Generated Queries</b>
 <br />
 Users also have the ability to generate queries by clicking on the nodes of the schema tree instead of typing those queries out manually. The result is an extremely intuitive experience and improved developer workflow that’s especially useful when testing new GraphQL APIs. 
@@ -36,8 +37,10 @@ No more guessing. No more relying on auto-completed fields. Generate queries as 
 <image width=500 src="./images/PractiQL-schemaTree.gif">
   
   
-Saved Queries
+<b>Saved Queries</b>
+<br />
 Navigated away from PractiQL? No problem. Queries are saved in local storage and populate automatically when you return.   
+<br />
 <image width=500 src="./images/PractiQL-local-storage.gif">  
   
     
