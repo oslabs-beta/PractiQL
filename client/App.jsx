@@ -25,7 +25,9 @@ import createTree from '../helpers/createTree.js';
 export default function App(props) {
   const { theme, endpoint } = props;
   const [editor, setEditor] = useState('');
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState(
+    localStorage.getItem('PractiQL') || ''
+  );
   const [myTheme, setMyTheme] = useState(theme);
   const [querySubjects, setQuerySubjects] = useState([]);
   const [results, setResults] = useState(false);
@@ -83,7 +85,7 @@ export default function App(props) {
 
   // Constructs new tree diagram and opens side bar
   const handleSchemaRequest = () => {
-    const widthToSet = sideBarWidth.width === '0rem' ? '18rem' : '0rem';
+    const widthToSet = sideBarWidth.width === '0rem' ? '20rem' : '0rem';
     const paddingToSet =
       sideBarWidth.padding === '0.5rem 0' ? '0.5rem' : '0.5rem 0';
     setSideBarWidth({ width: widthToSet, padding: paddingToSet });
@@ -119,6 +121,12 @@ export default function App(props) {
     const bottomBar = document.getElementById('bottom-bar');
     bottomBar.style.height = '0';
     bottomBar.style.padding = '1rem 0.75rem 0 0.75rem';
+  };
+
+  // Save queries in the LocalStorage
+  const handleSnapshot = () => {
+    //LocalStorage
+    localStorage.setItem('PractiQL', input.trim());
   };
 
   return (
@@ -164,8 +172,11 @@ export default function App(props) {
               <span className="bottom-bar-options bottom-bar-docs bottom-bar-unavailable">
                 Docs
               </span>
-              <span className="bottom-bar-options bottom-bar-metrics bottom-bar-unavailable">
-                Metrics
+              <span 
+                onClick={handleSnapshot}
+                className="bottom-bar-options bottom-bar-snapshot bottom-bar-available"
+              >
+                Save Snapshot
               </span>
             </div>
           </div>

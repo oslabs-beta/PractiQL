@@ -23,6 +23,14 @@
   color: $nord-green;
 }
 
+.bottom-bar-snapshot {
+  cursor: pointer;
+}
+
+.bottom-bar-snapshot:hover {
+  color: $nord-green;
+}
+
 .bottom-bar-toggle-icon-wrapper {
   display: inline-flex;
   height: 1.4rem;

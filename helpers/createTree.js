@@ -17,36 +17,51 @@ function createTree(schema) {
     return errorObject;
   }
 
-  const myTree = {
-    name: schema._queryType.name,
-    children: [],
-    toggled: true,
-  };
+  if(!schema) return {name: 'no schema found'};
 
-  const mainFields = Object.values(schema._queryType._fields);
-
-  mainFields.forEach((field) => {
-    const typeDef = {};
-    const attributes = {};
-    const children = [];
-
-    for (let i = 0; i < field.args.length; i++) {
-      attributes[field.args[i].name] = findType(field.args[i].type).name;
+  const myTree = [
+    {
+      name: schema._queryType.name, 
+      children: [],
+      type: schema._queryType
     }
+  ];
 
-    const innerChildren = Object.values(findSubFields(field.type));
 
-    for (let i = 0; i < innerChildren.length; i++) {
-      children.push(getChildren(innerChildren[i], field.name));
-    }
+  if(schema._mutationType) {
+    myTree.push({name: schema._mutationType.name, children: [], type: schema._mutationType});
+  }
 
-    typeDef.name = field.name;
-    typeDef.autoQueryChain = [field.name];
-    typeDef.attributes = attributes;
-    typeDef.children = children;
+  myTree.forEach(child => {
+    createTopLevel(child);
+  })
 
-    myTree.children.push(typeDef);
-  });
+
+  function createTopLevel(topChild) {
+    mainFields = Object.values(topChild.type._fields);
+    mainFields.forEach((field) => {
+      const typeDef = {};
+      const attributes = {};
+      const children = [];
+
+      for (let i = 0; i < field.args.length; i++) {
+        attributes[field.args[i].name] = findType(field.args[i].type).name;
+      }
+
+      const innerChildren = Object.values(findSubFields(field.type));
+
+      for (let i = 0; i < innerChildren.length; i++) {
+        children.push(getChildren(innerChildren[i], field.name));
+      }
+
+      typeDef.name = field.name;
+      typeDef.autoQueryChain = [field.name];
+      typeDef.attributes = attributes;
+      typeDef.children = children;
+
+      topChild.children.push(typeDef);
+    });
+  }
 
   function findType(type) {
     if (type.name) return { name: type.name, description: type.description };
@@ -82,7 +97,6 @@ function createTree(schema) {
 
     return typeDef;
   }
-  console.log(myTree);
   return myTree;
 }
 
