@@ -1,4 +1,4 @@
-<img src="./images/PractiQL-logodark.png">
+<img src="./images/PractiQL-logodark.png" style="width:1000px;">
 
 #
 <p align="center">
