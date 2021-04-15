@@ -15,7 +15,7 @@
 
 ## <b>Multiple Queries Simultaneously</b>
 PractiQL provides users with the ability to create and send out multiple queries at once without the need for GraphQL aliases. Results are returned in separate code blocks, including results for queries to the same field, for an intuitive and expedited experience with little mental overhead. 
-Send a bunch of queries. Get a bunch of responses. It just works.
+Send a bunch of queries. Get a bunch of responses. It just works. (NOTE: For internal API's, please enable CORS.)
 <br />
 <br />
 <image text-align=center width=650 src="./images/PractiQL-mq1.gif">
