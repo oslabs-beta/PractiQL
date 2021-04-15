@@ -1,4 +1,4 @@
-<img src="./images/PractiQL-logodark.png">
+<img src="./images/PractiQL-logodark.png" style="width:500px;">
 
 #
 <p align="center">
@@ -18,7 +18,7 @@ PractiQL provides users with the ability to create and send out multiple queries
 Send a bunch of queries. Get a bunch of responses. It just works.
 <br />
 <br />
-<image text-align=center width=650 src="./images/PractiQL-mq2.gif">
+<image text-align=center width=650 src="./images/PractiQL-mq1.gif">
 <br/>
 
 ## <b>Write a Bunch of Queries. Send the Ones You Want</b>
